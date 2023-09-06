@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  /* border: dotted 1px red; */
+}
+
+:root {
+  --padding: 2rem;
+}
+
+
+
+body {
+  height: 100vh;
+  background-color: #f2f2f2;
+  padding: var(--padding);
+}
+
+.header {
+  height: 5rem;
+  width: 100%;
+  background-color: rgba(255, 204, 0, 0.771);
+  display: grid;
+}
+
+.main {
+  background-color: #ffff;
+  height: fit-content;
+  min-height: calc(100vh * 0.2 - var(--padding));
+  width: 70%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#ListName {
+  color: #252525;
+  position: relative;
+  margin: auto auto 2rem auto;
+  display: flex;
+  font-size: 2rem;
+  width: 80%;
+  height: fit-content;
+  background-color: rgba(245, 245, 220, 0);
+  border: none;
+  padding: 8px;
+  font-weight: 700;
+  text-align: left;
+}
+
+#ListName:focus {
+  border-bottom: 1px solid rgba(71, 68, 68, 0.751);
+  border-radius: 0;
+  outline: none;
+}
+
+
+
+.sub_task,
+.task_name {
+  width: 80%;
+  height: 2.5rem;
+  margin: 1rem auto auto 2rem;
+  display: flex;
+  font-size: 2rem;
+}
+
+.sub_task {
+  margin: 0.5rem auto auto 3rem;
+}
+
+.sub_task button,
+.task_name button {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-color: rgba(245, 245, 220, 0);
+  border: 1px solid rgba(71, 68, 68, 0.751);
+  border-radius: 20%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.sub_task button h2,
+.task_name button h2 {
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -55%;
+}
+
+.sub_task input,
+.task_name input {
+  width: fit-content;
+  height: fit-content;
+  background-color: rgba(245, 245, 220, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 1rem;
+  /* text-decoration: line-through; */
+}
+
+.sub_task input:focus,
+.task_name input:focus {
+  border-bottom: 1px solid rgba(71, 68, 68, 0.751);
+  border-radius: 0;
+  outline: none;
+}
+
+
+
+/* .bordered {
+    border: dotted 1px magenta;
+} */
