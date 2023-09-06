@@ -67,8 +67,9 @@ body {
   margin: 0.5rem auto auto 3rem;
 }
 
-.sub_task button,
-.task_name button {
+.checkbox,
+.checkbox,
+.addBTN {
   position: relative;
   width: 25px;
   height: 25px;
@@ -81,8 +82,9 @@ body {
 }
 
 .sub_task button h2,
-.task_name button h2 {
-  color: white;
+.task_name button h2,
+.icon {
+  color: rgba(23, 21, 21, 0.859);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -91,7 +93,7 @@ body {
 
 .sub_task input,
 .task_name input {
-  width: fit-content;
+  width: 80%;
   height: fit-content;
   background-color: rgba(245, 245, 220, 0);
   border: 1px solid rgba(0, 0, 0, 0);
@@ -106,6 +108,17 @@ body {
   border-bottom: 1px solid rgba(71, 68, 68, 0.751);
   border-radius: 0;
   outline: none;
+}
+
+.action {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-color: rgba(245, 245, 220, 0);
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
 }
 
 
