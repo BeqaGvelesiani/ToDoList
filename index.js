@@ -6,7 +6,7 @@ let main_information = {
   subTask1: ""
 };
 
-render();
+//render();
 naming_list();
 
 //-----------------functions--------------------------//
