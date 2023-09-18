@@ -34,7 +34,9 @@ function render() {
           <button class="action" id="subtask${subTaskCounter}delete">
             <span class="material-symbols-outlined icon">delete</span>
           </button>
-        </div>
+  </div>
+
+        
       </div>
     `;
 
@@ -55,6 +57,22 @@ function hit_enter(a){
 }
 
 function addSubTask(){
+
+  // <div class="sub_task bordered" id="subtask${subTaskCounter}">
+  //         <button class="checkbox" id="subtask${subTaskCounter}check"></button>
+  //         <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
+  //         <button class="action" id="subtask${subTaskCounter}clear">
+  //           <span class="material-symbols-outlined icon">backspace</span>
+  //         </button>
+  //         <button class="action" id="subtask${subTaskCounter}delete">
+  //           <span class="material-symbols-outlined icon">delete</span>
+  //         </button>
+  // </div>
+
+
+
+
+
   console.log("add sub task")
 }
 
