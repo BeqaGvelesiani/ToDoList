@@ -8,8 +8,7 @@ let main_information = {
 
 render();
 naming_list();
-naming_task(1);
-naming_SubTask(1);
+
 
 //-----------------functions--------------------------//
 
@@ -36,8 +35,15 @@ function render() {
       </div>
     `;
 
+
+    document.getElementById(`subtask${subTaskCounter}text`).addEventListener("keyup", function(e){
+      e.key === 'Enter' ? console.log("+") : console.log("");
+    })
+
   check_If_Done_task(taskCounter);
   check_If_Done(subTaskCounter);
+  naming_task(taskCounter);
+  naming_SubTask(subTaskCounter);
 }
 
 function naming_list() {
