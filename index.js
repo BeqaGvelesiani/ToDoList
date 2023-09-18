@@ -28,23 +28,36 @@ function render() {
         <div class="sub_task bordered" id="subtask${subTaskCounter}">
           <button class="checkbox" id="subtask${subTaskCounter}check"></button>
           <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
-          <button class="action" id="subtask${subTaskCounter}delete">
+          <button class="action" id="subtask${subTaskCounter}clear">
             <span class="material-symbols-outlined icon">backspace</span>
+          </button>
+          <button class="action" id="subtask${subTaskCounter}delete">
+            <span class="material-symbols-outlined icon">delete</span>
           </button>
         </div>
       </div>
     `;
 
-
-    document.getElementById(`subtask${subTaskCounter}text`).addEventListener("keyup", function(e){
-      e.key === 'Enter' ? console.log("+") : console.log("");
-    })
+  hit_enter(subTaskCounter);
+    
 
   check_If_Done_task(taskCounter);
   check_If_Done(subTaskCounter);
   naming_task(taskCounter);
   naming_SubTask(subTaskCounter);
 }
+
+
+function hit_enter(a){
+  document.getElementById(`subtask${a}text`).addEventListener("keyup", function(e){
+    e.key === 'Enter' ? addSubTask() : console.log(e.key);
+  })
+}
+
+function addSubTask(){
+  console.log("add sub task")
+}
+
 
 function naming_list() {
   const ListName = document.getElementById("ListName");

@@ -119,6 +119,7 @@ body {
   cursor: pointer;
   display: grid;
   place-items: center;
+  /* border: #252525 dotted 1px; */
 }
 
 
