@@ -2,7 +2,7 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "Type name of todo list",
-  task1: ["task name", ["job to do"]],
+  task1: ["task name", ["job to do"], ["job to do"]],
   task2: ["task name", ["job to do"]]
 };
 
@@ -18,35 +18,45 @@ function render() {
 
 
     for (var i=1; i<Object.keys(main_information).length; i++){
-      console.log(i)
+      let a = i
       main.innerHTML += `
-      <div class="task"> 
+      <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
           <input class="job" id="task${i}text" type="text" placeholder="task name" />
         </div>
       </div>
       `
+      for (var S=1; S<main_information.task1.length; S++){
+        document.getElementById(`t${i}`).innerHTML += `
+        <div class="sub_task bordered" id="subtask${S}">
+          <button class="checkbox" id="subtask${S}check"></button>
+            <input class="job" id="subtask${S}text" type="text" placeholder="job" />
+            <button class="action" id="subtask${S}clear">
+              <span class="material-symbols-outlined icon">backspace</span>
+            </button>
+            <button class="action" id="subtask${S}delete">
+              <span class="material-symbols-outlined icon">delete</span>
+          </button>
+        </div>
+        `
+
+        console.log(i)
+
+        //console.log(document.getElementById(`subtask${i}text`))
+        
+        //document.getElementById(`subtask${i}text`).value = main_information.task1[1]
+      }
+      
     }
 
 
-    for (var i=1; i<Object.keys(main_information).length; i++){
-      console.log(i)
-    }
+    
 
 
       
 
-        // <div class="sub_task bordered" id="subtask${main_information.subTasks[0]}">
-        //   <button class="checkbox" id="subtask${main_information.subTasks[0]}check"></button>
-        //   <input class="job" id="subtask${main_information.subTasks[0]}text" type="text" placeholder="job to do" />
-        //   <button class="action" id="subtask${main_information.subTasks[0]}clear">
-        //     <span class="material-symbols-outlined icon">backspace</span>
-        //   </button>
-        //   <button class="action" id="subtask${main_information.subTasks[0]}delete">
-        //     <span class="material-symbols-outlined icon">delete</span>
-        //   </button>
-        // </div>
+        
 
 
   //hit_enter(subTaskCounter);
