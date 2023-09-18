@@ -3,23 +3,22 @@ const main = document.getElementById("main");
 let main_information = {
   name_of_list: "name",
   tasks: {},
-  subTasks: {}
+  subTasks: {},
 };
 
 render();
 naming_list();
 
-
 //-----------------functions--------------------------//
 
 function render() {
-  let taskCounter = 1;
-  let subTaskCounter = 1;
+  let taskCounter = Object.keys(main_information.tasks).length + 1;
+  let subTaskCounter = Object.keys(main_information.subTasks).length + 1;
 
   main.innerHTML = `
       <input class="bordered" type="text" placeholder="Type name of todo list" id="ListName"/>
       
-      <div class="task"> 
+      <div class="task" id="task${taskCounter}t"> 
         <div class="task_name bordered" id="task${taskCounter}">
           <button class="checkbox" id="task${taskCounter}check"></button>
           <input class="job" id="task${taskCounter}text" type="text" placeholder="task name" />
@@ -34,14 +33,12 @@ function render() {
           <button class="action" id="subtask${subTaskCounter}delete">
             <span class="material-symbols-outlined icon">delete</span>
           </button>
-  </div>
+        </div>
 
-        
       </div>
     `;
 
-  hit_enter(subTaskCounter);
-    
+  hit_enter(subTaskCounter, taskCounter);
 
   check_If_Done_task(taskCounter);
   check_If_Done(subTaskCounter);
@@ -49,33 +46,41 @@ function render() {
   naming_SubTask(subTaskCounter);
 }
 
-
-function hit_enter(a){
-  document.getElementById(`subtask${a}text`).addEventListener("keyup", function(e){
-    e.key === 'Enter' ? addSubTask() : console.log(e.key);
-  })
+function hit_enter(a, b) {
+  document
+    .getElementById(`subtask${a}text`)
+    .addEventListener("keyup", function (e) {
+      if (e.key === `Enter`) {
+        addSubTask(a, b);
+        console.log(a);
+        return (a += 1);
+      } else {
+        console.log(e.key);
+      }
+    });
 }
 
-function addSubTask(){
+function addSubTask(a, b) {
+  let task = document.getElementById(`task${b}t`);
+  task.innerHTML += `
+  <div class="sub_task bordered" id="subtask${a + 1}">
+           <button class="checkbox" id="subtask${a + 1}check"></button>
+           <input class="job" id="subtask${
+             a + 1
+           }text" type="text" placeholder="job to do" />
+           <button class="action" id="subtask${a + 1}clear">
+             <span class="material-symbols-outlined icon">backspace</span>
+           </button>
+           <button class="action" id="subtask${a + 1}delete">
+             <span class="material-symbols-outlined icon">delete</span>
+           </button>
+   </div>
+  `;
 
-  // <div class="sub_task bordered" id="subtask${subTaskCounter}">
-  //         <button class="checkbox" id="subtask${subTaskCounter}check"></button>
-  //         <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
-  //         <button class="action" id="subtask${subTaskCounter}clear">
-  //           <span class="material-symbols-outlined icon">backspace</span>
-  //         </button>
-  //         <button class="action" id="subtask${subTaskCounter}delete">
-  //           <span class="material-symbols-outlined icon">delete</span>
-  //         </button>
-  // </div>
-
-
-
-
-
-  console.log("add sub task")
+  
+  render();
+  console.log(task);
 }
-
 
 function naming_list() {
   const ListName = document.getElementById("ListName");
