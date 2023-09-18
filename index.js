@@ -2,12 +2,14 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "name",
-  task1: "",
-  subTask1: ""
+  tasks: {},
+  subTasks: {}
 };
 
 render();
 naming_list();
+naming_task(1);
+naming_SubTask(1);
 
 //-----------------functions--------------------------//
 
@@ -19,49 +21,46 @@ function render() {
       <input class="bordered" type="text" placeholder="Type name of todo list" id="ListName"/>
       
       <div class="task"> 
-        <div class="task_name bordered" id="task${1}">
-          <button class="checkbox" id="task${1}check"></button>
-          <input class="job" id="task${1}text" type="text" placeholder="task name" />
+        <div class="task_name bordered" id="task${taskCounter}">
+          <button class="checkbox" id="task${taskCounter}check"></button>
+          <input class="job" id="task${taskCounter}text" type="text" placeholder="task name" />
         </div>
 
-        <div class="sub_task bordered" id="subtask${1}">
-          <button class="checkbox" id="subtask${1}check"></button>
-          <input class="job" id="subtask${1}text" type="text" placeholder="job to do" />
-          <button class="action" id="subtask${1}delete">
-            <span class="material-symbols-outlined icon">backspace</span>
-          </button>
-        </div>
-        <div class="sub_task bordered" id="subtask${2}">
-          <button class="checkbox" id="subtask${2}check"></button>
-          <input class="job" id="subtask${2}text" type="text" placeholder="job to do" />
-          <button class="action" id="subtask${2}delete">
+        <div class="sub_task bordered" id="subtask${subTaskCounter}">
+          <button class="checkbox" id="subtask${subTaskCounter}check"></button>
+          <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
+          <button class="action" id="subtask${subTaskCounter}delete">
             <span class="material-symbols-outlined icon">backspace</span>
           </button>
         </div>
       </div>
     `;
 
-  check_If_Done_task(1);
-  check_If_Done(1);
-  check_If_Done(2);
-
-  document
-    .getElementById(`subtask${subTaskCounter}text`)
-    .addEventListener("keyup", () => {
-      console.log("hey");
-    });
+  check_If_Done_task(taskCounter);
+  check_If_Done(subTaskCounter);
 }
 
 function naming_list() {
   const ListName = document.getElementById("ListName");
-  const task = document.getElementById("task1");
   ListName.addEventListener("keyup", () => {
     main_information.name_of_list = ListName.value;
     console.log(`name: ${main_information.name_of_list}`);
   });
+}
+
+function naming_task(a) {
+  const task = document.getElementById(`task${a}text`);
   task.addEventListener("keyup", () => {
-    main_information.task1 = task.value;
-    console.log(`task name: ${main_information.task1}`);
+    main_information.subTasks.a = task.value;
+    console.log(`subTask${a} name: ${main_information.subTasks.a}`);
+  });
+}
+
+function naming_SubTask(a) {
+  const sub_task = document.getElementById(`subtask${a}text`);
+  sub_task.addEventListener("keyup", () => {
+    main_information.tasks.a = sub_task.value;
+    console.log(`task${a} name: ${main_information.tasks.a}`);
   });
 }
 
