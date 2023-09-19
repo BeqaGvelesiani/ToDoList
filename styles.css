@@ -7,8 +7,6 @@
   --padding: 2rem;
 }
 
-
-
 body {
   height: 100vh;
   background-color: #f2f2f2;
@@ -53,8 +51,6 @@ body {
   border-radius: 0;
   outline: none;
 }
-
-
 
 .sub_task,
 .task_name {
@@ -129,8 +125,21 @@ body {
   /* border: #252525 dotted 1px; */
 }
 
-
-
 /* .bordered {
     border: dotted 1px magenta;
 } */
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 0;
+    width: 100%;
+  }
+
+  .main {
+    width: 100%;
+    height: fit-content;
+    min-height: 90vh;
+    width: 99%;
+    margin: 0;
+  }
+}
