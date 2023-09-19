@@ -56,7 +56,7 @@ function naming_list() {
   const ListName = document.getElementById("ListName");
   ListName.addEventListener("keyup", () => {
     main_information.name_of_list = ListName.value;
-    console.log(`name changed: ${main_information.name_of_list}`);
+    //console.log(`name changed: ${main_information.name_of_list}`);
   });
 }
 // |
@@ -86,9 +86,9 @@ function hit_enter() {
 // |
 function addTask(i) {
   hit_enter();
-  console.log(i);
+  //console.log(i);
   main_information[`task${i + 1}`] = [["", 0], ["", 0]];
-  console.log(main_information);
+  //console.log(main_information);
   render();
 }
 // |
@@ -99,7 +99,7 @@ function addSubTask(i, D) {
   hit_enter();
   console.log(i, D);
   main_information[`task${i}`].push(["", 0]);
-  console.log(main_information);
+  //console.log(main_information);
   render();
 }
 // |
@@ -121,7 +121,7 @@ function makeChanges() {
       });
     }
   }
-  console.log(main_information);
+  //console.log(main_information);
 }
 // |
 // |
@@ -130,9 +130,9 @@ function makeChanges() {
 function check_If_Done() {
   for (let i = 1; i < Object.keys(main_information).length; i++) {
     let task = document.getElementById(`task${i}check`);
-    task.addEventListener("mouseup", () => {
-      console.log("check task");
-    });
+    let taskText = document.getElementById(`task${i}text`);
+    let taskN = main_information[`task${i}`][0][1];
+    let cheker = 0;
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
 
@@ -146,18 +146,57 @@ function check_If_Done() {
           subtasktext.style.color = "green";
           subtask.innerHTML = "<h2>✔️</h2>";
           main_information[`task${i}`][D][1] = 1;
-          console.log(main_information);
-          
+          //console.log(main_information);
+          cheker ++
+          //console.log("checker = " + cheker)
+          foo(taskText, task, taskN, main_information[`task${i}`], cheker)
         } else {
           subtasktext.style.textDecoration = "none";
           subtasktext.style.color = "black";
           subtask.innerHTML = "<h2></h2>";
           main_information[`task${i}`][D][1] = 0;
-          console.log(main_information)
-          
+          //console.log(main_information)
+          cheker --
+          //console.log("checker = " + cheker)
+          foo(taskText, task, taskN, main_information[`task${i}`], cheker)
         }
       });
-    }
+
+
+
+      if (main_information[`task${i}`][D][1]) {
+        subtasktext.style.textDecoration = "line-through";
+        subtasktext.style.color = "green";
+        subtask.innerHTML = "<h2>✔️</h2>";
+      } else {
+        subtasktext.style.textDecoration = "none";
+        subtasktext.style.color = "black";
+        subtask.innerHTML = "<h2></h2>";
+      }
+
+
+
+
+      
+    
+
+    
   }
 }
+}
 
+function foo(a, b, c, d, e){
+  e >= d.length-1 ? c = 1: c = 0;
+      
+    if (c) {
+      a.style.textDecoration = "line-through";
+      a.style.color = "green";
+      b.innerHTML = "<h2>✔️</h2>";
+    } else {
+      a.style.textDecoration = "none";
+      a.style.color = "black";
+      b.innerHTML = "<h2></h2>";
+    }
+
+    console.log(`cheker: ${e}, length: ${d.length-1}`)
+}
