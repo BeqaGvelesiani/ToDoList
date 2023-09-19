@@ -2,8 +2,8 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "Type name of todo list",
-  task1: ["task name", ["job to do"], ["job to do"]],
-  task2: ["task name", ["job to do"]]
+  task1: ["კვება", ["ვჭამო"], ["ბევრი წყალი დავლიო"]],
+  task2: ["ტასკის სახელი", ["job to do"]]
 };
 
 render();
@@ -23,10 +23,12 @@ function render() {
       <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
-          <input class="job" id="task${i}text" type="text" placeholder="task name" />
+          <input class="job" id="task${i}text" type="text" placeholder="task" />
         </div>
       </div>
       `
+      document.getElementById(`task${i}text`).value = "hey";
+
       for (var S=1; S<main_information.task1.length; S++){
         document.getElementById(`t${i}`).innerHTML += `
         <div class="sub_task bordered" id="subtask${S}">
@@ -40,12 +42,9 @@ function render() {
           </button>
         </div>
         `
-
+        document.getElementById(`subtask${S}text`).value = main_information.task1[S]
         console.log(i)
 
-        //console.log(document.getElementById(`subtask${i}text`))
-        
-        //document.getElementById(`subtask${i}text`).value = main_information.task1[1]
       }
       
     }
