@@ -42,6 +42,7 @@ function render() {
     }
   }
   hit_enter();
+  check_If_Done();
 }
 
 naming_list();
@@ -120,56 +121,50 @@ function makeChanges() {
       });
     }
   }
-  console.log(main_information)
+  console.log(main_information);
 }
 // |
 // |
 // |
 // |
-function check_If_Done(a) {
-  let subTaskCheck = document.getElementById(`subtask${a}check`);
-  let subTaskText = document.getElementById(`subtask${a}text`);
-  let on = true;
+function check_If_Done() {
+  for (let i = 1; i < Object.keys(main_information).length; i++) {
+    let task = document.getElementById(`task${i}check`);
+    task.addEventListener("mouseup", () => {
+      console.log("check task");
+    });
 
-  subTaskCheck.addEventListener("click", () => {
-    if (subTaskText.value.length == 0) {
-      console.log("empty");
-    } else {
-      if (on == true) {
-        subTaskCheck.innerHTML = "<h2>✔️</h2>";
-        subTaskCheck.style.backgroundColor = "#434eac";
-        on = false;
-        subTaskText.style.textDecoration = "line-through";
-      } else if (on == false) {
-        subTaskCheck.innerHTML = "<h2></h2>";
-        subTaskCheck.style.backgroundColor = "rgba(0, 0, 0, 0)";
-        on = true;
-        subTaskText.style.textDecoration = "none";
-      }
+    for (let D = 1; D < main_information[`task${i}`].length; D++) {
+      let subtask = document.getElementById(`subtask${i}_${D}check`);
+      let subtasktext = document.getElementById(`subtask${i}_${D}text`);
+      subtask.addEventListener("mouseup", () => {
+        if (subtasktext.value == false) {
+        } else {
+          console.log("check subTask");
+          subtasktext.style.textDecoration = "line-through";
+          subtasktext.style.color = "green";
+          subtask.innerHTML = "<h2>✔️</h2>";
+        }
+      });
     }
-  });
+  }
+  //console.log(main_information);
 }
 
-function check_If_Done_task(a) {
-  let taskCheck = document.getElementById(`task${a}check`);
-  let taskText = document.getElementById(`task${a}text`);
-  let on = true;
-
-  taskCheck.addEventListener("click", () => {
-    if (taskText.value.length == 0) {
-      console.log("empty");
-    } else {
-      if (on == true) {
-        taskCheck.innerHTML = "<h2>✔️</h2>";
-        taskCheck.style.backgroundColor = "#434eac";
-        on = false;
-        taskText.style.textDecoration = "line-through";
-      } else if (on == false) {
-        taskCheck.innerHTML = "<h2></h2>";
-        taskCheck.style.backgroundColor = "rgba(0, 0, 0, 0)";
-        on = true;
-        taskText.style.textDecoration = "none";
-      }
-    }
-  });
-}
+// taskCheck.addEventListener("click", () => {
+//   if (taskText.value.length == 0) {
+//     console.log("empty");
+//   } else {
+//     if (on == true) {
+//       taskCheck.innerHTML = "<h2>✔️</h2>";
+//       taskCheck.style.backgroundColor = "#434eac";
+//       on = false;
+//       taskText.style.textDecoration = "line-through";
+//     } else if (on == false) {
+//       taskCheck.innerHTML = "<h2></h2>";
+//       taskCheck.style.backgroundColor = "rgba(0, 0, 0, 0)";
+//       on = true;
+//       taskText.style.textDecoration = "none";
+//     }
+//   }
+// });
