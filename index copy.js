@@ -1,8 +1,8 @@
 const main = document.getElementById("main");
 
 let main_information = {
-  name_of_list: "Type name of todo list",
-  task1: ["", ""],
+  name_of_list: "",
+  task1: ["პირველი ტასკი", ""],
 };
 
 render();
@@ -10,9 +10,9 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
-  console.log("render")
+  console.log("render");
   main.innerHTML = `
-      <input class="bordered" type="text" placeholder="${main_information.name_of_list}" id="ListName"/>
+      <input class="bordered" type="text" placeholder="type list name" value="${main_information.name_of_list}" id="ListName"/>
     `;
 
   for (let i = 1; i < Object.keys(main_information).length; i++) {
@@ -45,15 +45,10 @@ function render() {
     }
   }
   hit_enter();
-
-  //check_If_Done_task(taskCounter);
-  //check_If_Done(subTaskCounter);
-  //naming_task(taskCounter);
-  //naming_SubTask(subTaskCounter);
 }
 
 naming_list();
-//hit_enter();
+
 // |
 // |
 // |
@@ -75,27 +70,26 @@ function hit_enter() {
     document
       .getElementById(`task${i}text`)
       .addEventListener("keyup", function (e) {
-        e.key === "Enter" ? addTask(i) : console.log(e.key);
+        e.key === "Enter" ? addTask(i) : makeChanges();
       });
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
       document
         .getElementById(`subtask${i}_${D}text`)
         .addEventListener("keyup", function (e) {
-          e.key === "Enter" ? addSubTask(i,D) : console.log(e.key);
+          e.key === "Enter" ? addSubTask(i, D) : makeChanges();
         });
-        
     }
   }
-  
 }
 // |
 // |
 // |
 // |
 function addTask(i) {
-  console.log(i)
-  main_information[`task${i+1}`] = ["", ""]
+  hit_enter();
+  console.log(i);
+  main_information[`task${i + 1}`] = ["", ""];
   console.log(main_information);
   render();
 }
@@ -104,8 +98,9 @@ function addTask(i) {
 // |
 // |
 function addSubTask(i, D) {
-  console.log(i, D)
-  main_information[`task${i}`].push("")
+  hit_enter();
+  console.log(i, D);
+  main_information[`task${i}`].push("");
   console.log(main_information);
   render();
 }
@@ -113,22 +108,28 @@ function addSubTask(i, D) {
 // |
 // |
 // |
-function naming_task(a) {
-  const task = document.getElementById(`task${a}text`);
-  task.addEventListener("keyup", () => {
-    main_information.subTasks.a = task.value;
-    console.log(`subTask${a} name: ${main_information.subTasks.a}`);
-  });
-}
+function makeChanges() {
+  for (let i = 1; i < Object.keys(main_information).length; i++) {
+    let task = document.getElementById(`task${i}text`);
 
-function naming_SubTask(a) {
-  const sub_task = document.getElementById(`subtask${a}text`);
-  sub_task.addEventListener("keyup", () => {
-    main_information.tasks.a = sub_task.value;
-    console.log(`task${a} name: ${main_information.tasks.a}`);
-  });
-}
+    task.addEventListener("keyup", () => {
+      main_information[`task${i}`][0] = task.value;
+      console.log(main_information.task1);
+    });
 
+    for (let D = 1; D < main_information[`task${i}`].length; D++) {
+      let subtask = document.getElementById(`subtask${i}_${D}text`);
+      subtask.addEventListener("keyup", () => {
+        main_information[`task${i}`][D] = subtask.value;
+        console.log(main_information);
+      });
+    }
+  }
+}
+// |
+// |
+// |
+// |
 function check_If_Done(a) {
   let subTaskCheck = document.getElementById(`subtask${a}check`);
   let subTaskText = document.getElementById(`subtask${a}text`);
