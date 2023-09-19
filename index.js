@@ -2,7 +2,7 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "",
-  task1: ["", ""],
+  task1: [["", 0], ["", 0]],
 };
 
 render();
@@ -20,14 +20,14 @@ function render() {
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
           <input class="job" id="task${i}text" type="text" placeholder="type summery name" value="${
-      main_information[`task${i}`][0]
+      main_information[`task${i}`][0][0]
     }" />
         </div>
       </div>
       `;
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
-      let text = main_information[`task${i}`][D];
+      let text = main_information[`task${i}`][D][0];
 
       document.getElementById(`t${i}`).innerHTML += `
         <div class="sub_task bordered" id="subtask${i}_${D}">
@@ -87,7 +87,7 @@ function hit_enter() {
 function addTask(i) {
   hit_enter();
   console.log(i);
-  main_information[`task${i + 1}`] = ["", ""];
+  main_information[`task${i + 1}`] = [["", 0], ["", 0]];
   console.log(main_information);
   render();
 }
@@ -98,7 +98,7 @@ function addTask(i) {
 function addSubTask(i, D) {
   hit_enter();
   console.log(i, D);
-  main_information[`task${i}`].push("");
+  main_information[`task${i}`].push(["", 0]);
   console.log(main_information);
   render();
 }
@@ -111,13 +111,13 @@ function makeChanges() {
     let task = document.getElementById(`task${i}text`);
 
     task.addEventListener("keyup", () => {
-      main_information[`task${i}`][0] = task.value;
+      main_information[`task${i}`][0][0] = task.value;
     });
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
       let subtask = document.getElementById(`subtask${i}_${D}text`);
       subtask.addEventListener("keyup", () => {
-        main_information[`task${i}`][D] = subtask.value;
+        main_information[`task${i}`][D][0] = subtask.value;
       });
     }
   }
@@ -135,35 +135,29 @@ function check_If_Done() {
     });
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
+
       let subtask = document.getElementById(`subtask${i}_${D}check`);
       let subtasktext = document.getElementById(`subtask${i}_${D}text`);
+
       subtask.addEventListener("mouseup", () => {
         if (subtasktext.value == false) {
-        } else {
-          console.log("check subTask");
+        } else if ((main_information[`task${i}`][D][1] == 0)) {
           subtasktext.style.textDecoration = "line-through";
           subtasktext.style.color = "green";
           subtask.innerHTML = "<h2>✔️</h2>";
+          main_information[`task${i}`][D][1] = 1;
+          console.log(main_information);
+          
+        } else {
+          subtasktext.style.textDecoration = "none";
+          subtasktext.style.color = "black";
+          subtask.innerHTML = "<h2></h2>";
+          main_information[`task${i}`][D][1] = 0;
+          console.log(main_information)
+          
         }
       });
     }
   }
 }
 
-// taskCheck.addEventListener("click", () => {
-//   if (taskText.value.length == 0) {
-//     console.log("empty");
-//   } else {
-//     if (on == true) {
-//       taskCheck.innerHTML = "<h2>✔️</h2>";
-//       taskCheck.style.backgroundColor = "#434eac";
-//       on = false;
-//       taskText.style.textDecoration = "line-through";
-//     } else if (on == false) {
-//       taskCheck.innerHTML = "<h2></h2>";
-//       taskCheck.style.backgroundColor = "rgba(0, 0, 0, 0)";
-//       on = true;
-//       taskText.style.textDecoration = "none";
-//     }
-//   }
-// });
