@@ -2,7 +2,7 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "",
-  task1: ["პირველი ტასკი", ""],
+  task1: ["", ""],
 };
 
 render();
@@ -10,7 +10,6 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
-  console.log("render");
   main.innerHTML = `
       <input class="bordered" type="text" placeholder="type list name" value="${main_information.name_of_list}" id="ListName"/>
     `;
@@ -112,17 +111,16 @@ function makeChanges() {
 
     task.addEventListener("keyup", () => {
       main_information[`task${i}`][0] = task.value;
-      console.log(main_information.task1);
     });
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
       let subtask = document.getElementById(`subtask${i}_${D}text`);
       subtask.addEventListener("keyup", () => {
         main_information[`task${i}`][D] = subtask.value;
-        console.log(main_information);
       });
     }
   }
+  console.log(main_information)
 }
 // |
 // |
