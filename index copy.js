@@ -2,8 +2,8 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "Type name of todo list",
-  task1: ["კვება", ["ვჭამო"], ["ბევრი წყალი დავლიო"]],
-  task2: ["ტასკის სახელი", ["job to do"]]
+  task1: ["კვება", ["საქმე 1"], ["საქმე 2"], ["საქმე 3"]],
+  task2: ["ტასკის სახელი", ["საქმე 4"]],
 };
 
 render();
@@ -16,47 +16,43 @@ function render() {
       <input class="bordered" type="text" placeholder="${main_information.name_of_list}" id="ListName"/>
     `;
 
-
-    for (var i=1; i<Object.keys(main_information).length; i++){
-      let a = i
-      main.innerHTML += `
+  for (var i = 1; i < Object.keys(main_information).length; i++) {
+    main.innerHTML += `
       <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
           <input class="job" id="task${i}text" type="text" placeholder="task" />
         </div>
       </div>
-      `
-      document.getElementById(`task${i}text`).value = "hey";
+      `;
+    document.getElementById(`task${i}text`).value = "hey";
 
-      for (var S=1; S<main_information.task1.length; S++){
-        document.getElementById(`t${i}`).innerHTML += `
-        <div class="sub_task bordered" id="subtask${S}">
-          <button class="checkbox" id="subtask${S}check"></button>
-            <input class="job" id="subtask${S}text" type="text" placeholder="job" />
-            <button class="action" id="subtask${S}clear">
+    for (var D = 1; D < main_information[`task${i}`].length; D++) {
+
+      console.log(`ID = ${i}_${D}`);
+      let text = main_information[`task${i}`][D]
+      console.log(text)
+      
+      document.getElementById(`t${i}`).innerHTML += `
+        <div class="sub_task bordered" id="subtask${i}_${D}">
+          <button class="checkbox" id="subtask${i}_${D}check"></button>
+            <input class="job" id="subtask${i}_${D}text" type="text" placeholder="${text}" />
+            <button class="action" id="subtask${i}_${D}clear">
               <span class="material-symbols-outlined icon">backspace</span>
             </button>
-            <button class="action" id="subtask${S}delete">
+            <button class="action" id="subtask${i}_${D}delete">
               <span class="material-symbols-outlined icon">delete</span>
           </button>
         </div>
-        `
-        document.getElementById(`subtask${S}text`).value = main_information.task1[S]
-        console.log(i)
+        `;
 
-      }
       
+      let job = document.getElementById(`subtask${i}_${D}text`);
+      console.log(job);
+      //job.style.border = `${D}px green solid`
+      job.value = text
     }
-
-
-    
-
-
-      
-
-        
-
+  }
 
   //hit_enter(subTaskCounter);
   //check_If_Done_task(taskCounter);
@@ -65,15 +61,15 @@ function render() {
   //naming_SubTask(subTaskCounter);
 }
 
-
-function hit_enter(a){
-  document.getElementById(`subtask${a}text`).addEventListener("keyup", function(e){
-    e.key === 'Enter' ? addSubTask() : console.log(e.key);
-  })
+function hit_enter(a) {
+  document
+    .getElementById(`subtask${a}text`)
+    .addEventListener("keyup", function (e) {
+      e.key === "Enter" ? addSubTask() : console.log(e.key);
+    });
 }
 
-function addSubTask(){
-
+function addSubTask() {
   // <div class="sub_task bordered" id="subtask${subTaskCounter}">
   //         <button class="checkbox" id="subtask${subTaskCounter}check"></button>
   //         <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
@@ -85,9 +81,8 @@ function addSubTask(){
   //         </button>
   // </div>
 
-  console.log("add sub task")
+  console.log("add sub task");
 }
-
 
 function naming_list() {
   const ListName = document.getElementById("ListName");
