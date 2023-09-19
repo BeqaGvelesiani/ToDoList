@@ -2,8 +2,7 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "Type name of todo list",
-  task1: ["კვება", ["საქმე 1"], ["საქმე 2"], ["საქმე 3"]],
-  task2: ["ტასკის სახელი", ["საქმე 4"]],
+  task1: ["", [""]],
 };
 
 render();
@@ -11,32 +10,29 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
-
   main.innerHTML = `
       <input class="bordered" type="text" placeholder="${main_information.name_of_list}" id="ListName"/>
     `;
 
-  for (var i = 1; i < Object.keys(main_information).length; i++) {
+  for (let i = 1; i < Object.keys(main_information).length; i++) {
     main.innerHTML += `
       <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
-          <input class="job" id="task${i}text" type="text" placeholder="task" />
+          <input class="job" id="task${i}text" type="text" placeholder="type summery name" value="${
+      main_information[`task${i}`][0]
+    }" />
         </div>
       </div>
       `;
-    document.getElementById(`task${i}text`).value = "hey";
 
-    for (var D = 1; D < main_information[`task${i}`].length; D++) {
+    for (let D = 1; D < main_information[`task${i}`].length; D++) {
+      let text = main_information[`task${i}`][D];
 
-      console.log(`ID = ${i}_${D}`);
-      let text = main_information[`task${i}`][D]
-      console.log(text)
-      
       document.getElementById(`t${i}`).innerHTML += `
         <div class="sub_task bordered" id="subtask${i}_${D}">
           <button class="checkbox" id="subtask${i}_${D}check"></button>
-            <input class="job" id="subtask${i}_${D}text" type="text" placeholder="${text}" />
+            <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
             <button class="action" id="subtask${i}_${D}clear">
               <span class="material-symbols-outlined icon">backspace</span>
             </button>
@@ -45,53 +41,61 @@ function render() {
           </button>
         </div>
         `;
-
-      
-      let job = document.getElementById(`subtask${i}_${D}text`);
-      console.log(job);
-      //job.style.border = `${D}px green solid`
-      job.value = text
     }
   }
 
-  //hit_enter(subTaskCounter);
   //check_If_Done_task(taskCounter);
   //check_If_Done(subTaskCounter);
   //naming_task(taskCounter);
   //naming_SubTask(subTaskCounter);
 }
 
-function hit_enter(a) {
-  document
-    .getElementById(`subtask${a}text`)
-    .addEventListener("keyup", function (e) {
-      e.key === "Enter" ? addSubTask() : console.log(e.key);
-    });
-}
-
-function addSubTask() {
-  // <div class="sub_task bordered" id="subtask${subTaskCounter}">
-  //         <button class="checkbox" id="subtask${subTaskCounter}check"></button>
-  //         <input class="job" id="subtask${subTaskCounter}text" type="text" placeholder="job to do" />
-  //         <button class="action" id="subtask${subTaskCounter}clear">
-  //           <span class="material-symbols-outlined icon">backspace</span>
-  //         </button>
-  //         <button class="action" id="subtask${subTaskCounter}delete">
-  //           <span class="material-symbols-outlined icon">delete</span>
-  //         </button>
-  // </div>
-
-  console.log("add sub task");
-}
-
+naming_list();
+hit_enter();
+// |
+// |
+// |
+// |
+// |
 function naming_list() {
   const ListName = document.getElementById("ListName");
   ListName.addEventListener("keyup", () => {
     main_information.name_of_list = ListName.value;
-    console.log(`name: ${main_information.name_of_list}`);
+    console.log(`name changed: ${main_information.name_of_list}`);
   });
 }
+// |
+// |
+// |
+// |
+function hit_enter() {
+  for (let i = 1; i < Object.keys(main_information).length; i++) {
+    document
+      .getElementById(`task${i}text`)
+      .addEventListener("keyup", function (e) {
+        e.key === "Enter" ? console.log("task Enter") : console.log(e.key);
+      });
 
+    for (let D = 1; D < main_information[`task${i}`].length; D++) {
+      document
+        .getElementById(`subtask${i}_${D}text`)
+        .addEventListener("keyup", function (e) {
+          e.key === "Enter" ? addSubTask() : console.log(e.key);
+        });
+    }
+  }
+}
+// |
+// |
+// |
+// |
+function addSubTask() {
+  console.log("add sub task");
+}
+// |
+// |
+// |
+// |
 function naming_task(a) {
   const task = document.getElementById(`task${a}text`);
   task.addEventListener("keyup", () => {
