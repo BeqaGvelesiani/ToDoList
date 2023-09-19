@@ -148,7 +148,6 @@ function check_If_Done() {
       });
     }
   }
-  //console.log(main_information);
 }
 
 // taskCheck.addEventListener("click", () => {
