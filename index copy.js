@@ -34,9 +34,7 @@ function render() {
         <div class="sub_task bordered" id="subtask${i}_${D}">
           <button class="checkbox" id="subtask${i}_${D}check"></button>
             <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
-            <button class="action" id="subtask${i}_${D}clear">
-              <span class="material-symbols-outlined icon">backspace</span>
-            </button>
+            
             <button class="action" id="subtask${i}_${D}delete">
               <span class="material-symbols-outlined icon">delete</span>
           </button>
