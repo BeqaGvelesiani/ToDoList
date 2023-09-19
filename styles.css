@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  /* border: dotted 1px red; */
+  /* border: solid 1px black; */
 }
 
 :root {
@@ -141,5 +141,6 @@ body {
     min-height: 90vh;
     width: 99%;
     margin: 0;
+    padding: 0;
   }
 }
