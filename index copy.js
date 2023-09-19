@@ -2,7 +2,7 @@ const main = document.getElementById("main");
 
 let main_information = {
   name_of_list: "Type name of todo list",
-  task1: ["", [""]],
+  task1: ["", ""],
 };
 
 render();
@@ -10,6 +10,7 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
+  console.log("render")
   main.innerHTML = `
       <input class="bordered" type="text" placeholder="${main_information.name_of_list}" id="ListName"/>
     `;
@@ -43,6 +44,7 @@ function render() {
         `;
     }
   }
+  hit_enter();
 
   //check_If_Done_task(taskCounter);
   //check_If_Done(subTaskCounter);
@@ -51,7 +53,7 @@ function render() {
 }
 
 naming_list();
-hit_enter();
+//hit_enter();
 // |
 // |
 // |
@@ -73,24 +75,39 @@ function hit_enter() {
     document
       .getElementById(`task${i}text`)
       .addEventListener("keyup", function (e) {
-        e.key === "Enter" ? console.log("task Enter") : console.log(e.key);
+        e.key === "Enter" ? addTask(i) : console.log(e.key);
       });
 
     for (let D = 1; D < main_information[`task${i}`].length; D++) {
       document
         .getElementById(`subtask${i}_${D}text`)
         .addEventListener("keyup", function (e) {
-          e.key === "Enter" ? addSubTask() : console.log(e.key);
+          e.key === "Enter" ? addSubTask(i,D) : console.log(e.key);
         });
+        
     }
   }
+  
 }
 // |
 // |
 // |
 // |
-function addSubTask() {
-  console.log("add sub task");
+function addTask(i) {
+  console.log(i)
+  main_information[`task${i+1}`] = ["", ""]
+  console.log(main_information);
+  render();
+}
+// |
+// |
+// |
+// |
+function addSubTask(i, D) {
+  console.log(i, D)
+  main_information[`task${i}`].push("")
+  console.log(main_information);
+  render();
 }
 // |
 // |
