@@ -125,6 +125,48 @@ body {
   /* border: #252525 dotted 1px; */
 }
 
+.sub_task{
+  display: none;
+}
+
+button {
+  margin: 0 8px;
+}
+
+.popupADD {
+  --displayOff: none;
+  --displayON: block;
+}
+
+.popupADD::before {
+  content: "add subtask";
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px rgb(149, 148, 148) solid;
+  height: fit-content;
+  width: fit-content;
+  background-color: whitesmoke;
+  position: absolute;
+  top: -50px;
+  display: var(--displayOff);
+}
+
+.popupADD:hover {
+  display: var(--display);
+}
+
+.popupDEL::before {
+  content: "delete task";
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px rgb(149, 148, 148) solid;
+  height: fit-content;
+  width: fit-content;
+  background-color: whitesmoke;
+  position: absolute;
+  top: -50px
+}
+
 /* .bordered {
     border: dotted 1px magenta;
 } */

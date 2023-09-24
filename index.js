@@ -25,6 +25,13 @@ function render() {
           <input class="job" id="task${i}text" type="text" placeholder="type summery name" value="${
       mInfo[`task${i}`][0][0]
     }" />
+          <button class="addBTN popupADD" id="taskicheck">
+            <span class="material-symbols-outlined icon ">add</span>
+          </button>
+          <button class="addBTN popupDEL" id="taskicheck">
+            <span class="material-symbols-outlined icon">delete</span>
+          </button>
+          
         </div>
       </div>
       `;
@@ -138,7 +145,13 @@ function check_If_Done() {
     let task = document.getElementById(`task${i}check`);
     let taskText = document.getElementById(`task${i}text`);
     let taskN = mInfo[`task${i}`][0][1];
-    foo(taskN, taskText, task, mInfo[`task${i}`][0][1], mInfo[`task${i}`].length);
+    foo(
+      taskN,
+      taskText,
+      task,
+      mInfo[`task${i}`][0][1],
+      mInfo[`task${i}`].length
+    );
 
     for (let D = 1; D < mInfo[`task${i}`].length; D++) {
       let subtask = document.getElementById(`subtask${i}_${D}check`);
@@ -155,7 +168,13 @@ function check_If_Done() {
           //console.log(tu)
           taskN += mInfo[`task${i}`][D][1];
 
-          foo(taskN, taskText, task, mInfo[`task${i}`][D][1], mInfo[`task${i}`].length);
+          foo(
+            taskN,
+            taskText,
+            task,
+            mInfo[`task${i}`][D][1],
+            mInfo[`task${i}`].length
+          );
           console.log("taskN = " + taskN);
         } else {
           subtasktext.style.textDecoration = "none";
@@ -165,7 +184,13 @@ function check_If_Done() {
           //console.log(mInfo)
           taskN -= 1;
 
-          foo(taskN, taskText, task, mInfo[`task${i}`][D][1], mInfo[`task${i}`].length);
+          foo(
+            taskN,
+            taskText,
+            task,
+            mInfo[`task${i}`][D][1],
+            mInfo[`task${i}`].length
+          );
           console.log("taskN = " + taskN);
         }
       });
@@ -184,7 +209,7 @@ function check_If_Done() {
 }
 
 function foo(indicator, text, check, length) {
-  if (indicator & indicator == length) {
+  if (indicator & (indicator == length)) {
     text.style.textDecoration = "line-through";
     text.style.color = "green";
     check.innerHTML = "<h2>✔️</h2>";
