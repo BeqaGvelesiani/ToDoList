@@ -133,10 +133,6 @@ button {
   margin: 0 8px;
 }
 
-.popupADD {
-  --displayOff: none;
-  --displayON: block;
-}
 
 .popupADD::before {
   content: "add subtask";
@@ -148,11 +144,11 @@ button {
   background-color: whitesmoke;
   position: absolute;
   top: -50px;
-  display: var(--displayOff);
+  opacity: 0;  
 }
 
-.popupADD:hover {
-  display: var(--display);
+.popupADD:hover::before {
+  opacity: 0.5;
 }
 
 .popupDEL::before {
@@ -164,7 +160,12 @@ button {
   width: fit-content;
   background-color: whitesmoke;
   position: absolute;
-  top: -50px
+  top: -50px;
+  opacity: 0;
+}
+
+.popupDEL:hover::before {
+  opacity: 0.5;
 }
 
 /* .bordered {
