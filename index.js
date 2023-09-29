@@ -2,10 +2,7 @@ const main = document.getElementById("main");
 
 let mInfo = {
   name_of_list: "",
-  task1: [
-    ["", 0],
-    ["", 0],
-  ],
+  task1: [["", 0], ["dds", 0],],
 };
 
 render();
@@ -29,7 +26,7 @@ function render() {
             <span class="material-symbols-outlined icon ">add</span>
           </button>
           <button class="addBTN popupDEL" id="taskicheck">
-            <span class="material-symbols-outlined icon">delete</span>
+            <span class="material-symbols-outlined icon">backspace</span>
           </button>
           
         </div>
@@ -45,7 +42,7 @@ function render() {
             <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
             
             <button class="action" id="subtask${i}_${D}delete">
-              <span class="material-symbols-outlined icon">delete</span>
+              <span class="material-symbols-outlined icon">backspace</span>
           </button>
         </div>
         `;
