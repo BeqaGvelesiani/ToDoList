@@ -144,7 +144,8 @@ button {
   background-color: whitesmoke;
   position: absolute;
   top: -50px;
-  opacity: 0;  
+  opacity: 0;
+  transition: 2000ms;  
 }
 
 .popupADD:hover::before {
@@ -162,6 +163,7 @@ button {
   position: absolute;
   top: -50px;
   opacity: 0;
+  transition: 2000ms;
 }
 
 .popupDEL:hover::before {
