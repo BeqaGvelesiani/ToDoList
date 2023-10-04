@@ -1,8 +1,10 @@
 const main = document.getElementById("main");
 
 let mInfo = {
-  name_of_list: "",
-  task1: [["", 0], ["dds", 0],],
+  name_of_list: "სახელი",
+  task1: [
+    ["task", 0],
+  ],
 };
 
 render();
@@ -26,7 +28,7 @@ function render() {
             <span class="material-symbols-outlined icon ">add</span>
           </button>
           <button class="addBTN popupDEL" id="taskicheck">
-            <span class="material-symbols-outlined icon">backspace</span>
+            <span class="material-symbols-outlined icon">delete</span>
           </button>
           
         </div>
@@ -35,19 +37,22 @@ function render() {
 
     for (let D = 1; D < mInfo[`task${i}`].length; D++) {
       let text = mInfo[`task${i}`][D][0];
+      console.log(`task${i}`+" "+text)
 
       document.getElementById(`t${i}`).innerHTML += `
         <div class="sub_task bordered" id="subtask${i}_${D}">
-          <button class="checkbox" id="subtask${i}_${D}check"></button>
+            <button class="checkbox" id="subtask${i}_${D}check"></button>
+            
             <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
             
             <button class="action" id="subtask${i}_${D}delete">
               <span class="material-symbols-outlined icon">backspace</span>
-          </button>
+            </button>
         </div>
         `;
     }
   }
+
   hit_enter();
   check_If_Done();
 }
@@ -78,13 +83,13 @@ function hit_enter() {
         e.key === "Enter" ? addTask(i) : makeChanges();
       });
 
-    for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-      document
-        .getElementById(`subtask${i}_${D}text`)
-        .addEventListener("keyup", function (e) {
-          e.key === "Enter" ? addSubTask(i, D) : makeChanges();
-        });
-    }
+    // for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+    //   document
+    //     .getElementById(`subtask${i}_${D}text`)
+    //     .addEventListener("keyup", function (e) {
+    //       e.key === "Enter" ? addSubTask(i, D) : makeChanges();
+    //     });
+    // }
   }
 }
 // |
@@ -95,7 +100,6 @@ function addTask(i) {
   hit_enter();
   //console.log(i);
   mInfo[`task${i + 1}`] = [
-    ["", 0],
     ["", 0],
   ];
   console.log(mInfo);

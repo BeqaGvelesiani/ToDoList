@@ -126,7 +126,7 @@ body {
 }
 
 .sub_task{
-  display: none;
+  display: flex;
 }
 
 button {
