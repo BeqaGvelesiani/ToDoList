@@ -2,9 +2,7 @@ const main = document.getElementById("main");
 
 let mInfo = {
   name_of_list: "სახელი",
-  task1: [
-    ["task", 0],
-  ],
+  task1: [["task", 0]],
 };
 
 render();
@@ -25,7 +23,7 @@ function render() {
       mInfo[`task${i}`][0][0]
     }" />
           <button class="addBTN popupADD" id="taskicheck">
-            <span class="material-symbols-outlined icon ">add</span>
+            <span class="material-symbols-outlined icon " id="add${i}">add</span>
           </button>
           <button class="addBTN popupDEL" id="taskicheck">
             <span class="material-symbols-outlined icon">delete</span>
@@ -37,7 +35,7 @@ function render() {
 
     for (let D = 1; D < mInfo[`task${i}`].length; D++) {
       let text = mInfo[`task${i}`][D][0];
-      console.log(`task${i}`+" "+text)
+      console.log(`task${i}` + " " + text);
 
       document.getElementById(`t${i}`).innerHTML += `
         <div class="sub_task bordered" id="subtask${i}_${D}">
@@ -52,7 +50,7 @@ function render() {
         `;
     }
   }
-
+  //add_subtask();
   hit_enter();
   check_If_Done();
 }
@@ -83,6 +81,9 @@ function hit_enter() {
         e.key === "Enter" ? addTask(i) : makeChanges();
       });
 
+    document.getElementById(`add${i}`).addEventListener("click", function () {
+      addSubTask(i);
+    });
     // for (let D = 1; D < mInfo[`task${i}`].length; D++) {
     //   document
     //     .getElementById(`subtask${i}_${D}text`)
@@ -99,9 +100,18 @@ function hit_enter() {
 function addTask(i) {
   hit_enter();
   //console.log(i);
-  mInfo[`task${i + 1}`] = [
-    ["", 0],
-  ];
+  mInfo[`task${i + 1}`] = [["", 0]];
+  console.log(mInfo);
+  render();
+}
+// |
+// |
+// |
+// |
+function add_subtask(i) {
+  hit_enter();
+  //console.log(i);
+  mInfo[`task${i + 1}`] = [["", 0]];
   console.log(mInfo);
   render();
 }
