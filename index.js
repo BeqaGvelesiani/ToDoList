@@ -26,7 +26,7 @@ function render() {
             <span class="material-symbols-outlined icon " id="add${i}">add</span>
           </button>
           <button class="addBTN popupDEL" id="taskicheck">
-            <span class="material-symbols-outlined icon">delete</span>
+            <span class="material-symbols-outlined icon" id="del${i}">delete</span>
           </button>
           
         </div>
@@ -84,6 +84,9 @@ function hit_enter() {
     document.getElementById(`add${i}`).addEventListener("click", function () {
       addSubTask(i);
     });
+    document.getElementById(`del${i}`).addEventListener("click", function () {
+      DelTask(i);
+    });
     // for (let D = 1; D < mInfo[`task${i}`].length; D++) {
     //   document
     //     .getElementById(`subtask${i}_${D}text`)
@@ -101,6 +104,17 @@ function addTask(i) {
   hit_enter();
   //console.log(i);
   mInfo[`task${i + 1}`] = [["", 0]];
+  console.log(mInfo);
+  render();
+}
+// |
+// |
+// |
+// |
+function DelTask(i) {
+  hit_enter();
+  //console.log(i);
+  delete mInfo[`task${i}`];
   console.log(mInfo);
   render();
 }
