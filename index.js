@@ -43,15 +43,15 @@ function render() {
             
             <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
             
-            <button class="action popupDEL backspace" id="subtask${i}_${D}delete">
-              <span class="material-symbols-outlined icon">backspace</span>
+            <button class="action popupDEL backspace">
+              <span class="material-symbols-outlined icon" id="subtask${i}_${D}delete">backspace</span>
             </button>
         </div>
         `;
     }
   }
   //add_subtask();
-  hit_enter();
+  controls();
   check_If_Done();
 }
 
@@ -73,7 +73,7 @@ function naming_list() {
 // |
 // |
 // |
-function hit_enter() {
+function controls() {
   for (let i = 1; i < Object.keys(mInfo).length; i++) {
     document
       .getElementById(`task${i}text`)
@@ -84,16 +84,24 @@ function hit_enter() {
     document.getElementById(`add${i}`).addEventListener("click", function () {
       addSubTask(i);
     });
+    //
     document.getElementById(`del${i}`).addEventListener("click", function () {
       DelTask(i);
     });
-    // for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-    //   document
-    //     .getElementById(`subtask${i}_${D}text`)
-    //     .addEventListener("keyup", function (e) {
-    //       e.key === "Enter" ? addSubTask(i, D) : makeChanges();
-    //     });
-    // }
+    //
+    for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+
+      document
+      .getElementById(`subtask${i}_${D}text`)
+      .addEventListener("keyup", function (e) {
+        mInfo[`task${i}`][D][0] += e.key
+        console.log(mInfo);
+      });
+
+      document.getElementById(`subtask${i}_${D}delete`).addEventListener("click", function () {
+        DelSubTask(i, D);
+      });
+    }
   }
 }
 // |
@@ -101,7 +109,7 @@ function hit_enter() {
 // |
 // |
 function addTask(i) {
-  hit_enter();
+  controls();
   //console.log(i);
   mInfo[`task${i + 1}`] = [["", 0]];
   console.log(mInfo);
@@ -112,7 +120,7 @@ function addTask(i) {
 // |
 // |
 function DelTask(i) {
-  hit_enter();
+  controls();
   //console.log(i);
   delete mInfo[`task${i}`];
   console.log(mInfo);
@@ -122,8 +130,19 @@ function DelTask(i) {
 // |
 // |
 // |
+function DelSubTask(i, d) {
+  controls();
+  //console.log(i);
+  delete mInfo[`task${i}`][d];
+  console.log(mInfo);
+  render();
+}
+// |
+// |
+// |
+// |
 function add_subtask(i) {
-  hit_enter();
+  controls();
   //console.log(i);
   mInfo[`task${i + 1}`] = [["", 0]];
   console.log(mInfo);
@@ -134,7 +153,7 @@ function add_subtask(i) {
 // |
 // |
 function addSubTask(i, D) {
-  hit_enter();
+  controls();
   console.log(i, D);
   mInfo[`task${i}`].push(["", 0]);
   //console.log(mInfo);
