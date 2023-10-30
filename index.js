@@ -43,7 +43,7 @@ function render() {
             
             <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
             
-            <button class="action" id="subtask${i}_${D}delete">
+            <button class="action popupDEL backspace" id="subtask${i}_${D}delete">
               <span class="material-symbols-outlined icon">backspace</span>
             </button>
         </div>

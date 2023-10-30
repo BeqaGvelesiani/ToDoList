@@ -143,7 +143,8 @@ button {
   width: fit-content;
   background-color: whitesmoke;
   position: absolute;
-  top: -50px;
+  top: -0px;
+  left: -90px;
   opacity: 0;
   transition: 2000ms;  
 }
@@ -161,13 +162,20 @@ button {
   width: fit-content;
   background-color: whitesmoke;
   position: absolute;
-  top: -50px;
+  top: -0px;
+  right: -80px;
   opacity: 0;
   transition: 2000ms;
 }
 
 .popupDEL:hover::before {
   opacity: 0.5;
+}
+
+.backspace::before {
+  content: "delete subtask";
+  left: -100px;
+  top: 3px;
 }
 
 /* .bordered {
