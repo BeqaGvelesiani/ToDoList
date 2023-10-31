@@ -55,17 +55,15 @@ function render() {
   //makeChanges();
 }
 //--------------------------------------------------------------------------------------------//
-
+//
+// ---↓--- rename the list ---↓---//
 document.getElementById("ListName").addEventListener("keyup", () => {
   mInfo.name_of_list = ListName.value;
   //console.log(`name changed: ${mInfo.name_of_list}`);
 });
-// |
-// |
-// |
-// |
-// |
-
+// ---↑--- rename the list ---↑---//
+//
+// ---↓--- control unit (this unit controls buttons and other) ---↓---//
 function controls() {
   for (let i = 1; i < Object.keys(mInfo).length; i++) {
     document
@@ -86,7 +84,9 @@ function controls() {
       document
         .getElementById(`subtask${i}_${D}text`)
         .addEventListener("keyup", function (e) {
-          mInfo[`task${i}`][D][0] += e.key;
+          mInfo[`task${i}`][D][0] = document.getElementById(
+            `subtask${i}_${D}text`
+          ).value;
           console.log(mInfo);
         });
 
@@ -98,21 +98,12 @@ function controls() {
     }
   }
 }
-// |
-// |
-// |
-// |
 function addTask(i) {
   controls();
-  //console.log(i);
   mInfo[`task${i + 1}`] = [["", 0]];
   console.log(mInfo);
   render();
 }
-// |
-// |
-// |
-// |
 function DelTask(i) {
   controls();
   //console.log(i);
@@ -120,33 +111,19 @@ function DelTask(i) {
   console.log(mInfo);
   render();
 }
-// |
-// |
-// |
-// |
 function DelSubTask(i, d) {
   controls();
-  console.log(mInfo[`task${i}`][d]);
-  //console.log(i);
-  //delete mInfo[`task${i}`][d];
-  console.log(mInfo);
+  mInfo[`task${i}`].splice(d, 1);
   render();
 }
-// |
-// |
-// |
-// |
 function addSubTask(i) {
   controls();
-  console.log(i);
   mInfo[`task${i}`].push(["", 0]);
   //console.log(mInfo);
   render();
 }
-// |
-// |
-// |
-// |
+// ---↑--- control unit ---↑---//
+//
 function makeChanges() {
   for (let i = 1; i < Object.keys(mInfo).length; i++) {
     let task = document.getElementById(`task${i}text`);
