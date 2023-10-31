@@ -1,8 +1,8 @@
 const main = document.getElementById("main");
 
-let mInfo = {
+export let mInfo = {
   name_of_list: "სახელი",
-  task1: [["task", 0]],
+  task1: [["", 0]],
 };
 
 render();
@@ -19,7 +19,7 @@ function render() {
       <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           <button class="checkbox" id="task${i}check"></button>
-          <input class="job" id="task${i}text" type="text" placeholder="type summery name" value="${
+          <input class="job" id="task${i}text" type="text" placeholder="type task" value="${
       mInfo[`task${i}`][0][0]
     }" />
           <button class="addBTN popupADD" id="taskicheck">
@@ -41,7 +41,7 @@ function render() {
         <div class="sub_task bordered" id="subtask${i}_${D}">
             <button class="checkbox" id="subtask${i}_${D}check"></button>
             
-            <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type job to do" value="${text}"/>
+            <input class="job" id="subtask${i}_${D}text" type="text" placeholder="type subtask" value="${text}"/>
             
             <button class="action popupDEL backspace">
               <span class="material-symbols-outlined icon" id="subtask${i}_${D}delete">backspace</span>
@@ -50,29 +50,22 @@ function render() {
         `;
     }
   }
-  //add_subtask();
   controls();
   check_If_Done();
+  //makeChanges();
 }
+//--------------------------------------------------------------------------------------------//
 
-naming_list();
+document.getElementById("ListName").addEventListener("keyup", () => {
+  mInfo.name_of_list = ListName.value;
+  //console.log(`name changed: ${mInfo.name_of_list}`);
+});
+// |
+// |
+// |
+// |
+// |
 
-// |
-// |
-// |
-// |
-// |
-function naming_list() {
-  const ListName = document.getElementById("ListName");
-  ListName.addEventListener("keyup", () => {
-    mInfo.name_of_list = ListName.value;
-    //console.log(`name changed: ${mInfo.name_of_list}`);
-  });
-}
-// |
-// |
-// |
-// |
 function controls() {
   for (let i = 1; i < Object.keys(mInfo).length; i++) {
     document
@@ -90,17 +83,18 @@ function controls() {
     });
     //
     for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+      document
+        .getElementById(`subtask${i}_${D}text`)
+        .addEventListener("keyup", function (e) {
+          mInfo[`task${i}`][D][0] += e.key;
+          console.log(mInfo);
+        });
 
       document
-      .getElementById(`subtask${i}_${D}text`)
-      .addEventListener("keyup", function (e) {
-        mInfo[`task${i}`][D][0] += e.key
-        console.log(mInfo);
-      });
-
-      document.getElementById(`subtask${i}_${D}delete`).addEventListener("click", function () {
-        DelSubTask(i, D);
-      });
+        .getElementById(`subtask${i}_${D}delete`)
+        .addEventListener("click", function () {
+          DelSubTask(i, D);
+        });
     }
   }
 }
@@ -132,8 +126,9 @@ function DelTask(i) {
 // |
 function DelSubTask(i, d) {
   controls();
+  console.log(mInfo[`task${i}`][d]);
   //console.log(i);
-  delete mInfo[`task${i}`][d];
+  //delete mInfo[`task${i}`][d];
   console.log(mInfo);
   render();
 }
@@ -141,20 +136,9 @@ function DelSubTask(i, d) {
 // |
 // |
 // |
-function add_subtask(i) {
+function addSubTask(i) {
   controls();
-  //console.log(i);
-  mInfo[`task${i + 1}`] = [["", 0]];
-  console.log(mInfo);
-  render();
-}
-// |
-// |
-// |
-// |
-function addSubTask(i, D) {
-  controls();
-  console.log(i, D);
+  console.log(i);
   mInfo[`task${i}`].push(["", 0]);
   //console.log(mInfo);
   render();
@@ -169,16 +153,17 @@ function makeChanges() {
 
     task.addEventListener("keyup", () => {
       mInfo[`task${i}`][0][0] = task.value;
+      console.log(`task changed ${mInfo[`task${i}`][0][0]}`);
     });
 
     for (let D = 1; D < mInfo[`task${i}`].length; D++) {
       let subtask = document.getElementById(`subtask${i}_${D}text`);
       subtask.addEventListener("keyup", () => {
         mInfo[`task${i}`][D][0] = subtask.value;
+        console.log(`subTask changed ${mInfo[`task${i}`][D][0]}`);
       });
     }
   }
-  //console.log(mInfo);
 }
 // |
 // |
