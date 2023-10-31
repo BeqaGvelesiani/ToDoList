@@ -214,8 +214,8 @@ function check_If_Done() {
   }
 }
 
-function foo(indicator, text, check, length) {
-  if (indicator & (indicator == length)) {
+function foo(i, text, check, length) {
+  if (i & (i == length)) {
     text.style.textDecoration = "line-through";
     text.style.color = "green";
     check.innerHTML = "<h2>✔️</h2>";
