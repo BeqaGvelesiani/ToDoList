@@ -1,17 +1,18 @@
 const main = document.getElementById("main");
 
-export let mInfo = {
+let mInfo = {
   name_of_list: "",
   task1: [["", 0]],
 };
 
 render();
 
-
 //-----------------functions--------------------------//
 
 function render() {
+  getDataFromLocalStorage();
   main.innerHTML = `
+      
       <input class="bordered" type="text" placeholder="type list name" value="${mInfo.name_of_list}" id="ListName"/>
     `;
 
@@ -56,12 +57,12 @@ function render() {
   //makeChanges();
 }
 
-
 //--------------------------------------------------------------------------------------------//
 //
 // ---↓--- rename the list ---↓---//
 document.getElementById("ListName").addEventListener("keyup", () => {
   mInfo.name_of_list = ListName.value;
+  saveDataToLocalStorage();
   //console.log(`name changed: ${mInfo.name_of_list}`);
 });
 // ---↑--- rename the list ---↑---//
@@ -171,22 +172,13 @@ function check_If_Done() {
           document.getElementById(`task${i}text`),
           document.getElementById(`task${i}check`)
         );
-
-
       });
-
-
     } else {
       console.log("hello");
 
       let B = 0;
       for (let D = 1; D < mInfo[`task${i}`].length; D++) {
         //console.log(mInfo[`task${i}`][D][1]);
-
-
-
-        
-
 
         checkSign(
           mInfo[`task${i}`][D][1],
@@ -202,33 +194,28 @@ function check_If_Done() {
               (mInfo[`task${i}`][D][0] != "")
             ) {
               mInfo[`task${i}`][D][1] = 1;
-          
             } else {
               mInfo[`task${i}`][D][1] = 0;
-              
             }
-
 
             let A = mInfo[`task${i}`].length - 1;
             let B = 0;
 
-            for (let b=1; b<mInfo[`task${i}`].length; b++){
-              
-              B += mInfo[`task${i}`][b][1]
+            for (let b = 1; b < mInfo[`task${i}`].length; b++) {
+              B += mInfo[`task${i}`][b][1];
             }
 
             console.log(`A = ${A}   B = ${B}`);
 
-
-            if (A === B){
-              console.log("it's time")
-              mInfo[`task${i}`][0][1] = 1
+            if (A === B) {
+              console.log("it's time");
+              mInfo[`task${i}`][0][1] = 1;
               checkSign(
                 mInfo[`task${i}`][0][1],
                 document.getElementById(`task${i}text`),
                 document.getElementById(`task${i}check`)
               );
-            }else{
+            } else {
               mInfo[`task${i}`][0][1] = 0;
               checkSign(
                 mInfo[`task${i}`][0][1],
@@ -236,89 +223,17 @@ function check_If_Done() {
                 document.getElementById(`task${i}check`)
               );
             }
-            
+
             checkSign(
               mInfo[`task${i}`][D][1],
               document.getElementById(`subtask${i}_${D}text`),
               document.getElementById(`subtask${i}_${D}check`)
             );
           });
-
-       
-          
-        
       }
     }
   }
-  
 }
-
-// for (let i = 1; i < Object.keys(mInfo).length; i++) {
-//   let task = document.getElementById(`task${i}check`);
-//   let taskText = document.getElementById(`task${i}text`);
-//   let taskN = mInfo[`task${i}`][0][1];
-//   foo(
-//     taskN,
-//     taskText,
-//     task,
-//     mInfo[`task${i}`][0][1],
-//     mInfo[`task${i}`].length
-//   );
-
-//   for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-//     let subtask = document.getElementById(`subtask${i}_${D}check`);
-//     let subtasktext = document.getElementById(`subtask${i}_${D}text`);
-
-//     subtask.addEventListener("mouseup", () => {
-//       if (subtasktext.value == false) {
-//       } else if (mInfo[`task${i}`][D][1] == 0) {
-//         subtasktext.style.textDecoration = "line-through";
-//         subtasktext.style.color = "green";
-//         subtask.innerHTML = "<h2>✔️</h2>";
-//         mInfo[`task${i}`][D][1] = 1;
-//         //console.log(mInfo);
-//         //console.log(tu)
-//         taskN += mInfo[`task${i}`][D][1];
-
-//         foo(
-//           taskN,
-//           taskText,
-//           task,
-//           mInfo[`task${i}`][D][1],
-//           mInfo[`task${i}`].length
-//         );
-//         console.log("taskN = " + taskN);
-//       } else {
-//         subtasktext.style.textDecoration = "none";
-//         subtasktext.style.color = "black";
-//         subtask.innerHTML = "<h2></h2>";
-//         mInfo[`task${i}`][D][1] = 0;
-//         //console.log(mInfo)
-//         taskN -= 1;
-
-//         foo(
-//           taskN,
-//           taskText,
-//           task,
-//           mInfo[`task${i}`][D][1],
-//           mInfo[`task${i}`].length
-//         );
-//         console.log("taskN = " + taskN);
-//       }
-//     });
-
-//       if (mInfo[`task${i}`][D][1]) {
-//         subtasktext.style.textDecoration = "line-through";
-//         subtasktext.style.color = "green";
-//         subtask.innerHTML = "<h2>✔️</h2>";
-//       } else {
-//         subtasktext.style.textDecoration = "none";
-//         subtasktext.style.color = "black";
-//         subtask.innerHTML = "<h2></h2>";
-//       }
-//     }
-//   }
-// }
 
 function checkSign(indicator, text, checksign) {
   if (indicator === 0) {
@@ -331,3 +246,26 @@ function checkSign(indicator, text, checksign) {
     checksign.innerHTML = "<h2>✔️</h2>";
   }
 }
+
+
+
+function saveDataToLocalStorage(){
+  localStorage.setItem("data", JSON.stringify(mInfo))
+}
+
+function getDataFromLocalStorage(){
+  mInfo = JSON.parse(localStorage.getItem("data"));
+  console.log(mInfo)
+}
+
+document.getElementById("clearAllBTN").addEventListener("click", ()=>{
+  console.log("heeeeeeeeey")
+  localStorage.clear();
+  let a = {
+    name_of_list: "",
+    task1: [["", 0]],
+  };
+  localStorage.setItem("data", `${a}`)
+  render()
+})
+
