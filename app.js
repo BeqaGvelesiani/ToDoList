@@ -1,16 +1,19 @@
 const main = document.getElementById("main");
 
+document.getElementById("clearAllBTN").addEventListener("click", ()=>{
+  cleardata()
+})
+
 let mInfo = {
   name_of_list: "",
   task1: [["", 0]],
 };
-
 render();
 
 //-----------------functions--------------------------//
 
 function render() {
-  getDataFromLocalStorage();
+  
   main.innerHTML = `
       
       <input class="bordered" type="text" placeholder="type list name" value="${mInfo.name_of_list}" id="ListName"/>
@@ -62,7 +65,7 @@ function render() {
 // ---↓--- rename the list ---↓---//
 document.getElementById("ListName").addEventListener("keyup", () => {
   mInfo.name_of_list = ListName.value;
-  saveDataToLocalStorage();
+  save();
   //console.log(`name changed: ${mInfo.name_of_list}`);
 });
 // ---↑--- rename the list ---↑---//
@@ -91,6 +94,7 @@ function controls() {
           mInfo[`task${i}`][D][0] = document.getElementById(
             `subtask${i}_${D}text`
           ).value;
+          save();
           //console.log(mInfo);
         });
 
@@ -105,6 +109,7 @@ function controls() {
 function addTask(i) {
   controls();
   mInfo[`task${i + 1}`] = [["", 0]];
+  save();
   //console.log(mInfo);
   render();
 }
@@ -112,17 +117,20 @@ function DelTask(i) {
   controls();
   //console.log(i);
   delete mInfo[`task${i}`];
+  save();
   //console.log(mInfo);
   render();
 }
 function DelSubTask(i, d) {
   controls();
   mInfo[`task${i}`].splice(d, 1);
+  save();
   render();
 }
 function addSubTask(i) {
   controls();
   mInfo[`task${i}`].push(["", 0]);
+  save();
   //console.log(mInfo);
   render();
 }
@@ -134,6 +142,7 @@ function makeChanges() {
 
     task.addEventListener("keyup", () => {
       mInfo[`task${i}`][0][0] = task.value;
+      save();
       //console.log(`task changed ${mInfo[`task${i}`][0][0]}`);
     });
 
@@ -141,6 +150,7 @@ function makeChanges() {
       let subtask = document.getElementById(`subtask${i}_${D}text`);
       subtask.addEventListener("keyup", () => {
         mInfo[`task${i}`][D][0] = subtask.value;
+        save();
         //console.log(`subTask changed ${mInfo[`task${i}`][D][0]}`);
       });
     }
@@ -153,7 +163,7 @@ function makeChanges() {
 function check_If_Done() {
   for (let i = 1; i < Object.keys(mInfo).length; i++) {
     if (mInfo[`task${i}`].length == 1) {
-      console.log("hey");
+      //console.log("hey");
 
       checkSign(
         mInfo[`task${i}`][0][1],
@@ -174,7 +184,7 @@ function check_If_Done() {
         );
       });
     } else {
-      console.log("hello");
+      //console.log("hello");
 
       let B = 0;
       for (let D = 1; D < mInfo[`task${i}`].length; D++) {
@@ -194,8 +204,10 @@ function check_If_Done() {
               (mInfo[`task${i}`][D][0] != "")
             ) {
               mInfo[`task${i}`][D][1] = 1;
+              save();
             } else {
               mInfo[`task${i}`][D][1] = 0;
+              save();
             }
 
             let A = mInfo[`task${i}`].length - 1;
@@ -249,23 +261,25 @@ function checkSign(indicator, text, checksign) {
 
 
 
-function saveDataToLocalStorage(){
+function save(){
   localStorage.setItem("data", JSON.stringify(mInfo))
 }
 
 function getDataFromLocalStorage(){
-  mInfo = JSON.parse(localStorage.getItem("data"));
-  console.log(mInfo)
+  mInfo = JSON.parse(localStorage.getItem("data"))
 }
 
-document.getElementById("clearAllBTN").addEventListener("click", ()=>{
-  console.log("heeeeeeeeey")
-  localStorage.clear();
+
+
+function cleardata(){
+  localStorage.clear()
+  
   let a = {
-    name_of_list: "",
+    name_of_list: "examle",
     task1: [["", 0]],
   };
-  localStorage.setItem("data", `${a}`)
+  localStorage.setItem("data", JSON.stringify(a))
+  console.log("clear!")
   render()
-})
-
+  
+}
