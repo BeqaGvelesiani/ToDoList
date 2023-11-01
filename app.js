@@ -13,7 +13,7 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
-  
+  getDataFromLocalStorage()
   main.innerHTML = `
       
       <input class="bordered" type="text" placeholder="type list name" value="${mInfo.name_of_list}" id="ListName"/>
@@ -215,11 +215,13 @@ function check_If_Done() {
 
             for (let b = 1; b < mInfo[`task${i}`].length; b++) {
               B += mInfo[`task${i}`][b][1];
+              save()
             }
 
             console.log(`A = ${A}   B = ${B}`);
 
             if (A === B) {
+              getDataFromLocalStorage()
               console.log("it's time");
               mInfo[`task${i}`][0][1] = 1;
               checkSign(
@@ -228,6 +230,7 @@ function check_If_Done() {
                 document.getElementById(`task${i}check`)
               );
             } else {
+              getDataFromLocalStorage()
               mInfo[`task${i}`][0][1] = 0;
               checkSign(
                 mInfo[`task${i}`][0][1],
@@ -252,10 +255,12 @@ function checkSign(indicator, text, checksign) {
     text.style.textDecoration = "none";
     text.style.color = "black";
     checksign.innerHTML = "<h2></h2>";
+    save()
   } else {
     text.style.textDecoration = "line-through";
     text.style.color = "green";
     checksign.innerHTML = "<h2>✔️</h2>";
+    save()
   }
 }
 
@@ -275,7 +280,7 @@ function cleardata(){
   localStorage.clear()
   
   let a = {
-    name_of_list: "examle",
+    name_of_list: "",
     task1: [["", 0]],
   };
   localStorage.setItem("data", JSON.stringify(a))
