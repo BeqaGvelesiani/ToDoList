@@ -208,7 +208,7 @@ button {
   .main {
     width: 100%;
     height: fit-content;
-    min-height: 100vh;
+    min-height: 60vh;
     width: 99%;
     margin: 0;
     padding: 0;

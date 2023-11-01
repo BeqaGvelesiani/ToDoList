@@ -196,6 +196,12 @@ function check_If_Done() {
           document.getElementById(`subtask${i}_${D}check`)
         );
 
+        checkSign(
+          mInfo[`task${i}`][0][1],
+          document.getElementById(`task${i}text`),
+          document.getElementById(`task${i}check`)
+        );
+
         document
           .getElementById(`subtask${i}_${D}check`)
           .addEventListener("click", () => {
@@ -215,6 +221,7 @@ function check_If_Done() {
 
             for (let b = 1; b < mInfo[`task${i}`].length; b++) {
               B += mInfo[`task${i}`][b][1];
+              console.log(`b = ${B}`)
               save()
             }
 
@@ -224,6 +231,7 @@ function check_If_Done() {
               getDataFromLocalStorage()
               console.log("it's time");
               mInfo[`task${i}`][0][1] = 1;
+              save()
               checkSign(
                 mInfo[`task${i}`][0][1],
                 document.getElementById(`task${i}text`),
@@ -232,6 +240,7 @@ function check_If_Done() {
             } else {
               getDataFromLocalStorage()
               mInfo[`task${i}`][0][1] = 0;
+              save()
               checkSign(
                 mInfo[`task${i}`][0][1],
                 document.getElementById(`task${i}text`),
