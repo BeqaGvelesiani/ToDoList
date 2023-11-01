@@ -147,104 +147,133 @@ function makeChanges() {
 // |
 // |
 function check_If_Done() {
+  for (let i = 1; i < Object.keys(mInfo).length; i++) {
+    if (mInfo[`task${i}`].length == 1) {
+      console.log("hey");
 
-  for(let i=1; i<Object.keys(mInfo).length; i++){
-    if(mInfo[`task${i}`].length == 1){
-      console.log("hey")
-      foo(
-        mInfo[`task${i}`],
+      checkSign(
+        mInfo[`task${i}`][0][1],
         document.getElementById(`task${i}text`),
-        check,
-        length
+        document.getElementById(`task${i}check`)
       );
 
-
-
-
-
-
-
-
-
-
-
-
-    }else{
+      document.getElementById(`task${i}check`).addEventListener("click", () => {
+        if ((mInfo[`task${i}`][0][1] == 0) & (mInfo[`task${i}`][0][0] != "")) {
+          mInfo[`task${i}`][0][1] = 1;
+        } else {
+          mInfo[`task${i}`][0][1] = 0;
+        }
+        checkSign(
+          mInfo[`task${i}`][0][1],
+          document.getElementById(`task${i}text`),
+          document.getElementById(`task${i}check`)
+        );
+      });
+    } else {
       console.log("hello");
 
+      for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+        let state = 0;
+
+        console.log(mInfo[`task${i}`][D][1]);
+
+        checkSign(
+          mInfo[`task${i}`][D][1],
+          document.getElementById(`subtask${i}_${D}text`),
+          document.getElementById(`subtask${i}_${D}check`)
+        );
+
+        document
+          .getElementById(`subtask${i}_${D}check`)
+          .addEventListener("click", () => {
+            if (
+              (mInfo[`task${i}`][D][1] == 0) &
+              (mInfo[`task${i}`][D][0] != "")
+            ) {
+              mInfo[`task${i}`][D][1] = 1;
+              state += 1
+            } else {
+              mInfo[`task${i}`][D][1] = 0;
+              state -= 1;
+            }
 
 
 
 
+            checkSign(
+              mInfo[`task${i}`][D][1],
+              document.getElementById(`subtask${i}_${D}text`),
+              document.getElementById(`subtask${i}_${D}check`)
+            );
+          });
 
+        
 
-
-
-
-
-
+        if (A) {
+          checkSign(
+            mInfo[`task${i}`][0][1],
+            document.getElementById(`task${i}text`),
+            document.getElementById(`task${i}check`)
+          );
+        }
+      }
     }
   }
-
-
-
-
-
-
-  // for (let i = 1; i < Object.keys(mInfo).length; i++) {
-  //   let task = document.getElementById(`task${i}check`);
-  //   let taskText = document.getElementById(`task${i}text`);
-  //   let taskN = mInfo[`task${i}`][0][1];
-  //   foo(
-  //     taskN,
-  //     taskText,
-  //     task,
-  //     mInfo[`task${i}`][0][1],
-  //     mInfo[`task${i}`].length
-  //   );
-
-  //   for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-  //     let subtask = document.getElementById(`subtask${i}_${D}check`);
-  //     let subtasktext = document.getElementById(`subtask${i}_${D}text`);
-
-  //     subtask.addEventListener("mouseup", () => {
-  //       if (subtasktext.value == false) {
-  //       } else if (mInfo[`task${i}`][D][1] == 0) {
-  //         subtasktext.style.textDecoration = "line-through";
-  //         subtasktext.style.color = "green";
-  //         subtask.innerHTML = "<h2>✔️</h2>";
-  //         mInfo[`task${i}`][D][1] = 1;
-  //         //console.log(mInfo);
-  //         //console.log(tu)
-  //         taskN += mInfo[`task${i}`][D][1];
-
-  //         foo(
-  //           taskN,
-  //           taskText,
-  //           task,
-  //           mInfo[`task${i}`][D][1],
-  //           mInfo[`task${i}`].length
-  //         );
-  //         console.log("taskN = " + taskN);
-  //       } else {
-  //         subtasktext.style.textDecoration = "none";
-  //         subtasktext.style.color = "black";
-  //         subtask.innerHTML = "<h2></h2>";
-  //         mInfo[`task${i}`][D][1] = 0;
-  //         //console.log(mInfo)
-  //         taskN -= 1;
-
-  //         foo(
-  //           taskN,
-  //           taskText,
-  //           task,
-  //           mInfo[`task${i}`][D][1],
-  //           mInfo[`task${i}`].length
-  //         );
-  //         console.log("taskN = " + taskN);
-  //       }
-  //     });
 }
+
+// for (let i = 1; i < Object.keys(mInfo).length; i++) {
+//   let task = document.getElementById(`task${i}check`);
+//   let taskText = document.getElementById(`task${i}text`);
+//   let taskN = mInfo[`task${i}`][0][1];
+//   foo(
+//     taskN,
+//     taskText,
+//     task,
+//     mInfo[`task${i}`][0][1],
+//     mInfo[`task${i}`].length
+//   );
+
+//   for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+//     let subtask = document.getElementById(`subtask${i}_${D}check`);
+//     let subtasktext = document.getElementById(`subtask${i}_${D}text`);
+
+//     subtask.addEventListener("mouseup", () => {
+//       if (subtasktext.value == false) {
+//       } else if (mInfo[`task${i}`][D][1] == 0) {
+//         subtasktext.style.textDecoration = "line-through";
+//         subtasktext.style.color = "green";
+//         subtask.innerHTML = "<h2>✔️</h2>";
+//         mInfo[`task${i}`][D][1] = 1;
+//         //console.log(mInfo);
+//         //console.log(tu)
+//         taskN += mInfo[`task${i}`][D][1];
+
+//         foo(
+//           taskN,
+//           taskText,
+//           task,
+//           mInfo[`task${i}`][D][1],
+//           mInfo[`task${i}`].length
+//         );
+//         console.log("taskN = " + taskN);
+//       } else {
+//         subtasktext.style.textDecoration = "none";
+//         subtasktext.style.color = "black";
+//         subtask.innerHTML = "<h2></h2>";
+//         mInfo[`task${i}`][D][1] = 0;
+//         //console.log(mInfo)
+//         taskN -= 1;
+
+//         foo(
+//           taskN,
+//           taskText,
+//           task,
+//           mInfo[`task${i}`][D][1],
+//           mInfo[`task${i}`].length
+//         );
+//         console.log("taskN = " + taskN);
+//       }
+//     });
 
 //       if (mInfo[`task${i}`][D][1]) {
 //         subtasktext.style.textDecoration = "line-through";
@@ -259,14 +288,14 @@ function check_If_Done() {
 //   }
 // }
 
-function foo(i, text, check, length) {
-  if (i & (i == length)) {
-    text.style.textDecoration = "line-through";
-    text.style.color = "green";
-    check.innerHTML = "<h2>✔️</h2>";
-  } else {
+function checkSign(indicator, text, checksign) {
+  if (indicator === 0) {
     text.style.textDecoration = "none";
     text.style.color = "black";
-    check.innerHTML = "<h2></h2>";
+    checksign.innerHTML = "<h2></h2>";
+  } else {
+    text.style.textDecoration = "line-through";
+    text.style.color = "green";
+    checksign.innerHTML = "<h2>✔️</h2>";
   }
 }
