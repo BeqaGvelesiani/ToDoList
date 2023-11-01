@@ -1,11 +1,12 @@
 const main = document.getElementById("main");
 
 export let mInfo = {
-  name_of_list: "სახელი",
+  name_of_list: "",
   task1: [["", 0]],
 };
 
 render();
+
 
 //-----------------functions--------------------------//
 
@@ -54,6 +55,8 @@ function render() {
   check_If_Done();
   //makeChanges();
 }
+
+
 //--------------------------------------------------------------------------------------------//
 //
 // ---↓--- rename the list ---↓---//
@@ -87,7 +90,7 @@ function controls() {
           mInfo[`task${i}`][D][0] = document.getElementById(
             `subtask${i}_${D}text`
           ).value;
-          console.log(mInfo);
+          //console.log(mInfo);
         });
 
       document
@@ -168,14 +171,22 @@ function check_If_Done() {
           document.getElementById(`task${i}text`),
           document.getElementById(`task${i}check`)
         );
+
+
       });
+
+
     } else {
       console.log("hello");
 
+      let B = 0;
       for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-        let state = 0;
+        //console.log(mInfo[`task${i}`][D][1]);
 
-        console.log(mInfo[`task${i}`][D][1]);
+
+
+        
+
 
         checkSign(
           mInfo[`task${i}`][D][1],
@@ -191,15 +202,41 @@ function check_If_Done() {
               (mInfo[`task${i}`][D][0] != "")
             ) {
               mInfo[`task${i}`][D][1] = 1;
-              state += 1
+          
             } else {
               mInfo[`task${i}`][D][1] = 0;
-              state -= 1;
+              
             }
 
 
+            let A = mInfo[`task${i}`].length - 1;
+            let B = 0;
+
+            for (let b=1; b<mInfo[`task${i}`].length; b++){
+              
+              B += mInfo[`task${i}`][b][1]
+            }
+
+            console.log(`A = ${A}   B = ${B}`);
 
 
+            if (A === B){
+              console.log("it's time")
+              mInfo[`task${i}`][0][1] = 1
+              checkSign(
+                mInfo[`task${i}`][0][1],
+                document.getElementById(`task${i}text`),
+                document.getElementById(`task${i}check`)
+              );
+            }else{
+              mInfo[`task${i}`][0][1] = 0;
+              checkSign(
+                mInfo[`task${i}`][0][1],
+                document.getElementById(`task${i}text`),
+                document.getElementById(`task${i}check`)
+              );
+            }
+            
             checkSign(
               mInfo[`task${i}`][D][1],
               document.getElementById(`subtask${i}_${D}text`),
@@ -207,18 +244,13 @@ function check_If_Done() {
             );
           });
 
+       
+          
         
-
-        if (A) {
-          checkSign(
-            mInfo[`task${i}`][0][1],
-            document.getElementById(`task${i}text`),
-            document.getElementById(`task${i}check`)
-          );
-        }
       }
     }
   }
+  
 }
 
 // for (let i = 1; i < Object.keys(mInfo).length; i++) {
