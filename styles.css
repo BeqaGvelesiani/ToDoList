@@ -53,7 +53,7 @@ body {
 }
 
 #ListName:focus {
-  border-bottom: 1px solid rgba(71, 68, 68, 0.751);
+  border-bottom: 1px solid rgba(240, 19, 19, 0.15);
   border-radius: 0;
   outline: none;
 }
@@ -114,7 +114,7 @@ body {
 
 .sub_task input:focus,
 .task_name input:focus {
-  border-bottom: 1px solid rgba(71, 68, 68, 0.751);
+  border-bottom: 1px solid rgba(240, 19, 19, 0.15);
   border-radius: 0;
   outline: none;
 }
