@@ -109,14 +109,17 @@ function controls() {
 function addTask(i) {
   controls();
   mInfo[`task${i + 1}`] = [["", 0]];
+  
   save();
   //console.log(mInfo);
   render();
+  
 }
 function DelTask(i) {
   controls();
   //console.log(i);
   delete mInfo[`task${i}`];
+  
   save();
   //console.log(mInfo);
   render();
@@ -124,12 +127,14 @@ function DelTask(i) {
 function DelSubTask(i, d) {
   controls();
   mInfo[`task${i}`].splice(d, 1);
+  
   save();
   render();
 }
 function addSubTask(i) {
   controls();
   mInfo[`task${i}`].push(["", 0]);
+  mInfo[`task${i}`][0][1]=0;
   save();
   //console.log(mInfo);
   render();
