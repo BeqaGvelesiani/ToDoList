@@ -1,7 +1,7 @@
 const main = document.getElementById("main");
 
 document.getElementById("clearAllBTN").addEventListener("click", ()=>{
-  cleardata()
+  document.getElementById("modal").style.display = "flex";
 })
 
 let mInfo = {
@@ -300,5 +300,13 @@ function cleardata(){
   localStorage.setItem("data", JSON.stringify(a))
   console.log("clear!")
   render()
-  
 }
+
+document.getElementById("yesClear").addEventListener("click", ()=>{
+  document.getElementById("modal").style.display = "none";
+  cleardata()
+});
+
+document.getElementById("cancel").addEventListener("click", () => {
+  document.getElementById("modal").style.display = "none";
+});

@@ -184,12 +184,13 @@ button {
   top: 3px;
 }
 
-#clearAllBTN {
+.redBTN,
+.greenBTN {
   display: flex;
   background-color: red;
   font-size: 16px;
   border-radius: 8px;
-  color:#f2f2f2;
+  color: whitesmoke;
   padding: 8px;
   width: fit-content;
   height: fit-content;
@@ -199,11 +200,52 @@ button {
   border: none;
   text-transform: uppercase;
   font-weight: bolder;
+  cursor: pointer;
 }
+
+.greenBTN {
+  background-color: green;
+}
+
+.redBTN:hover,
+.greenBTN:hover {
+  background-color: rgba(255, 179, 0, 0.597);
+}
+
+
 
 /* .bordered {
     border: dotted 1px magenta;
 } */
+
+#modal {
+  background-color: #252525e6;
+  width: 80vw;
+  height: 90vh;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+#inmodal {
+  display: flax;
+  background-color: whitesmoke;
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 50px;
+  border-radius: 4px;
+}
 
 @media only screen and (max-width: 600px) {
   body {
