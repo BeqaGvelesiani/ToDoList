@@ -1,14 +1,10 @@
 const main = document.getElementById("main");
 
-document.getElementById("clearAllBTN").addEventListener("click", ()=>{
+document.getElementById("clearAllBTN").addEventListener("click", () => {
   document.getElementById("modal").style.display = "flex";
-})
+});
 
-let mInfo = {
-  name_of_list: "",
-  task1: [["", 0]],
-};
-
+let mInfo = ["", [["", 0]]];
 
 document.getElementById("yesClear").addEventListener("click", () => {
   document.getElementById("modal").style.display = "none";
@@ -24,20 +20,21 @@ render();
 //-----------------functions--------------------------//
 
 function render() {
-  getDataFromLocalStorage()
+  getDataFromLocalStorage();
   main.innerHTML = `
       
-      <input class="bordered" type="text" placeholder="type list name" value="${mInfo.name_of_list}" id="ListName"/>
+      <input class="bordered" type="text" placeholder="type list name" value="${mInfo[0]}" id="ListName"/>
     `;
 
-  for (let i = 1; i < Object.keys(mInfo).length; i++) {
+  for (let i = 1; i < mInfo.length; i++) {
     main.innerHTML += `
+
       <div class="task" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
+          
           <button class="checkbox" id="task${i}check"></button>
-          <input class="job" id="task${i}text" type="text" placeholder="type task" value="${
-      mInfo[`task${i}`][0][0]
-    }" />
+          <input class="job" id="task${i}text" type="text" placeholder="type task" value="${mInfo[i][0][0]}" />
+          
           <button class="addBTN popupADD" id="taskicheck">
             <span class="material-symbols-outlined icon " id="add${i}">add</span>
           </button>
@@ -49,8 +46,8 @@ function render() {
       </div>
       `;
 
-    for (let D = 1; D < mInfo[`task${i}`].length; D++) {
-      let text = mInfo[`task${i}`][D][0];
+    for (let D = 1; D < mInfo[i].length; D++) {
+      let text = mInfo[i][D][0];
       //console.log(`task${i}` + " " + text);
 
       document.getElementById(`t${i}`).innerHTML += `
@@ -75,7 +72,7 @@ function render() {
 //
 // ---↓--- rename the list ---↓---//
 document.getElementById("ListName").addEventListener("keyup", () => {
-  mInfo.name_of_list = ListName.value;
+  mInfo[0] = ListName.value;
   save();
   //console.log(`name changed: ${mInfo.name_of_list}`);
 });
@@ -83,7 +80,7 @@ document.getElementById("ListName").addEventListener("keyup", () => {
 //
 // ---↓--- control unit (this unit controls buttons and other) ---↓---//
 function controls() {
-  for (let i = 1; i < Object.keys(mInfo).length; i++) {
+  for (let i = 1; i < mInfo.length; i++) {
     document
       .getElementById(`task${i}text`)
       .addEventListener("keyup", function (e) {
@@ -98,11 +95,11 @@ function controls() {
       DelTask(i);
     });
     //
-    for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+    for (let D = 1; D < mInfo[i].length; D++) {
       document
         .getElementById(`subtask${i}_${D}text`)
         .addEventListener("keyup", function (e) {
-          mInfo[`task${i}`][D][0] = document.getElementById(
+          mInfo[i][D][0] = document.getElementById(
             `subtask${i}_${D}text`
           ).value;
           save();
@@ -119,33 +116,32 @@ function controls() {
 }
 function addTask(i) {
   controls();
-  mInfo[`task${i + 1}`] = [["", 0]];
-  
+  mInfo.push([["", 0]]);
+
   save();
   //console.log(mInfo);
   render();
-  
 }
 function DelTask(i) {
   controls();
   //console.log(i);
-  delete mInfo[`task${i}`];
-  
+  mInfo.splice(i, 1);
+
   save();
   //console.log(mInfo);
   render();
 }
 function DelSubTask(i, d) {
   controls();
-  mInfo[`task${i}`].splice(d, 1);
-  
+  mInfo[i].splice(d, 1);
+
   save();
   render();
 }
 function addSubTask(i) {
   controls();
-  mInfo[`task${i}`].push(["", 0]);
-  mInfo[`task${i}`][0][1]=0;
+  mInfo[i].push(["", 0]);
+  mInfo[i][0][1] = 0;
   save();
   //console.log(mInfo);
   render();
@@ -153,19 +149,19 @@ function addSubTask(i) {
 // ---↑--- control unit ---↑---//
 //
 function makeChanges() {
-  for (let i = 1; i < Object.keys(mInfo).length; i++) {
+  for (let i = 1; i < mInfo.length; i++) {
     let task = document.getElementById(`task${i}text`);
 
     task.addEventListener("keyup", () => {
-      mInfo[`task${i}`][0][0] = task.value;
+      mInfo[i][0][0] = task.value;
       save();
       //console.log(`task changed ${mInfo[`task${i}`][0][0]}`);
     });
 
-    for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+    for (let D = 1; D < mInfo[i].length; D++) {
       let subtask = document.getElementById(`subtask${i}_${D}text`);
       subtask.addEventListener("keyup", () => {
-        mInfo[`task${i}`][D][0] = subtask.value;
+        mInfo[i][D][0] = subtask.value;
         save();
         //console.log(`subTask changed ${mInfo[`task${i}`][D][0]}`);
       });
@@ -177,24 +173,24 @@ function makeChanges() {
 // |
 // |
 function check_If_Done() {
-  for (let i = 1; i < Object.keys(mInfo).length; i++) {
-    if (mInfo[`task${i}`].length == 1) {
+  for (let i = 1; i < mInfo.length; i++) {
+    if (mInfo[i].length == 1) {
       //console.log("hey");
 
       checkSign(
-        mInfo[`task${i}`][0][1],
+        mInfo[i][0][1],
         document.getElementById(`task${i}text`),
         document.getElementById(`task${i}check`)
       );
 
       document.getElementById(`task${i}check`).addEventListener("click", () => {
-        if ((mInfo[`task${i}`][0][1] == 0) & (mInfo[`task${i}`][0][0] != "")) {
-          mInfo[`task${i}`][0][1] = 1;
+        if ((mInfo[i][0][1] == 0) & (mInfo[i][0][0] != "")) {
+          mInfo[i][0][1] = 1;
         } else {
-          mInfo[`task${i}`][0][1] = 0;
+          mInfo[i][0][1] = 0;
         }
         checkSign(
-          mInfo[`task${i}`][0][1],
+          mInfo[i][0][1],
           document.getElementById(`task${i}text`),
           document.getElementById(`task${i}check`)
         );
@@ -203,17 +199,17 @@ function check_If_Done() {
       //console.log("hello");
 
       let B = 0;
-      for (let D = 1; D < mInfo[`task${i}`].length; D++) {
+      for (let D = 1; D < mInfo[i].length; D++) {
         //console.log(mInfo[`task${i}`][D][1]);
 
         checkSign(
-          mInfo[`task${i}`][D][1],
+          mInfo[i][D][1],
           document.getElementById(`subtask${i}_${D}text`),
           document.getElementById(`subtask${i}_${D}check`)
         );
 
         checkSign(
-          mInfo[`task${i}`][0][1],
+          mInfo[i][0][1],
           document.getElementById(`task${i}text`),
           document.getElementById(`task${i}check`)
         );
@@ -221,51 +217,48 @@ function check_If_Done() {
         document
           .getElementById(`subtask${i}_${D}check`)
           .addEventListener("click", () => {
-            if (
-              (mInfo[`task${i}`][D][1] == 0) &
-              (mInfo[`task${i}`][D][0] != "")
-            ) {
-              mInfo[`task${i}`][D][1] = 1;
+            if ((mInfo[i][D][1] == 0) & (mInfo[i][D][0] != "")) {
+              mInfo[i][D][1] = 1;
               save();
             } else {
-              mInfo[`task${i}`][D][1] = 0;
+              mInfo[i][D][1] = 0;
               save();
             }
 
-            let A = mInfo[`task${i}`].length - 1;
+            let A = mInfo[i].length - 1;
             let B = 0;
 
-            for (let b = 1; b < mInfo[`task${i}`].length; b++) {
-              B += mInfo[`task${i}`][b][1];
-              console.log(`b = ${B}`)
-              save()
+            for (let b = 1; b < mInfo[i].length; b++) {
+              B += mInfo[i][b][1];
+              console.log(`b = ${B}`);
+              save();
             }
 
             console.log(`A = ${A}   B = ${B}`);
 
             if (A === B) {
-              getDataFromLocalStorage()
+              getDataFromLocalStorage();
               console.log("it's time");
-              mInfo[`task${i}`][0][1] = 1;
-              save()
+              mInfo[i][0][1] = 1;
+              save();
               checkSign(
-                mInfo[`task${i}`][0][1],
+                mInfo[i][0][1],
                 document.getElementById(`task${i}text`),
                 document.getElementById(`task${i}check`)
               );
             } else {
-              getDataFromLocalStorage()
-              mInfo[`task${i}`][0][1] = 0;
-              save()
+              getDataFromLocalStorage();
+              mInfo[i][0][1] = 0;
+              save();
               checkSign(
-                mInfo[`task${i}`][0][1],
+                mInfo[i][0][1],
                 document.getElementById(`task${i}text`),
                 document.getElementById(`task${i}check`)
               );
             }
 
             checkSign(
-              mInfo[`task${i}`][D][1],
+              mInfo[i][D][1],
               document.getElementById(`subtask${i}_${D}text`),
               document.getElementById(`subtask${i}_${D}check`)
             );
@@ -280,36 +273,28 @@ function checkSign(indicator, text, checksign) {
     text.style.textDecoration = "none";
     text.style.color = "black";
     checksign.innerHTML = "<h2></h2>";
-    save()
+    save();
   } else {
     text.style.textDecoration = "line-through";
     text.style.color = "green";
     checksign.innerHTML = "<h2>✔️</h2>";
-    save()
+    save();
   }
 }
 
-
-
-function save(){
-  localStorage.setItem("data", JSON.stringify(mInfo))
+function save() {
+  localStorage.setItem("data", JSON.stringify(mInfo));
 }
 
-function getDataFromLocalStorage(){
-  mInfo = JSON.parse(localStorage.getItem("data"))
+function getDataFromLocalStorage() {
+  mInfo = JSON.parse(localStorage.getItem("data"));
 }
 
+function cleardata() {
+  localStorage.clear();
 
-
-function cleardata(){
-  localStorage.clear()
-  
-  let a = {
-    name_of_list: "",
-    task1: [["", 0]],
-  };
-  localStorage.setItem("data", JSON.stringify(a))
-  console.log("clear!")
-  render()
+  let a = ["", [["", 0]]];
+  localStorage.setItem("data", JSON.stringify(a));
+  console.log("clear!");
+  render();
 }
-
