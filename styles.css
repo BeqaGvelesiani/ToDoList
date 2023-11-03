@@ -204,13 +204,13 @@ button {
   text-transform: uppercase;
   font-weight: bolder;
   cursor: pointer;
-  border-radius: 25% 75% 67% 33% / 22% 42% 58% 78%;
+
   padding: 16px;
 }
 
 .greenBTN {
   background-color: #259613;
-  border-radius: 37% 63% 38% 62% / 60% 27% 73% 40%;
+
   padding: 16px;
 }
 
@@ -235,7 +235,6 @@ button {
   display: none;
   margin: 0;
   padding: 0;
-  
 }
 
 #inmodal {
