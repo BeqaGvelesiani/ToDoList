@@ -201,10 +201,14 @@ button {
   text-transform: uppercase;
   font-weight: bolder;
   cursor: pointer;
+  border-radius: 25% 75% 67% 33% / 22% 42% 58% 78%;
+  padding: 16px;
 }
 
 .greenBTN {
-  background-color: green;
+  background-color: #259613;
+  border-radius: 37% 63% 38% 62% / 60% 27% 73% 40% ;
+  padding: 16px;
 }
 
 .redBTN:hover,
@@ -245,6 +249,8 @@ button {
   text-align: center;
   padding: 50px;
   border-radius: 4px;
+  -webkit-box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 14px 5px rgba(0,0,0,0.38); 
+box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 14px 5px rgba(0,0,0,0.38);
 }
 
 @media only screen and (max-width: 600px) {
