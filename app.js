@@ -74,7 +74,7 @@ function render() {
 document.getElementById("ListName").addEventListener("keyup", () => {
   mInfo[0] = ListName.value;
   save();
-  //console.log(`name changed: ${mInfo.name_of_list}`);
+  console.log(`name changed: ${mInfo[0]}`);
 });
 // ---↑--- rename the list ---↑---//
 //
