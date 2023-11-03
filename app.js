@@ -8,6 +8,17 @@ let mInfo = {
   name_of_list: "",
   task1: [["", 0]],
 };
+
+
+document.getElementById("yesClear").addEventListener("click", () => {
+  document.getElementById("modal").style.display = "none";
+  cleardata();
+});
+
+document.getElementById("cancel").addEventListener("click", () => {
+  document.getElementById("modal").style.display = "none";
+});
+
 render();
 
 //-----------------functions--------------------------//
@@ -302,11 +313,3 @@ function cleardata(){
   render()
 }
 
-document.getElementById("yesClear").addEventListener("click", ()=>{
-  document.getElementById("modal").style.display = "none";
-  cleardata()
-});
-
-document.getElementById("cancel").addEventListener("click", () => {
-  document.getElementById("modal").style.display = "none";
-});
