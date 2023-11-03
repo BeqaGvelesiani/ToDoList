@@ -156,10 +156,12 @@ button {
   left: -90px;
   opacity: 0;
   transition: 2000ms;
+  display: none;
 }
 
 .popupADD:hover::before {
-  opacity: 0.5;
+  opacity: 0.7;
+  display: block;
 }
 
 .popupDEL::before {
@@ -175,16 +177,19 @@ button {
   right: -80px;
   opacity: 0;
   transition: 2000ms;
+  display: none;
 }
 
 .popupDEL:hover::before {
-  opacity: 0.5;
+  opacity: 0.7;
+  display: block;
 }
 
 .backspace::before {
   content: "delete subtask";
   left: -100px;
   top: 3px;
+  display: none;
 }
 
 .redBTN,
