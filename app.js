@@ -24,6 +24,7 @@ function render() {
   main.innerHTML = `
       
       <input class="bordered" type="text" placeholder="type list name" value="${mInfo[0]}" id="ListName"/>
+      <p class="text-center">${date()}</p>
     `;
 
   for (let i = 1; i < mInfo.length; i++) {
@@ -297,4 +298,10 @@ function cleardata() {
   localStorage.setItem("data", JSON.stringify(a));
   console.log("clear!");
   render();
+}
+
+function date() {
+  var currentdate = new Date();
+  var date = `${currentdate.getDate()}/${currentdate.getMonth()}/${currentdate.getFullYear()}`
+  return date
 }
