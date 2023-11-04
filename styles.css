@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  /* border: solid 1px black; */
+  border: dotted 1px rgb(244, 196, 196);
 }
 
 :root {
@@ -8,9 +8,10 @@
 }
 
 body {
+  display: block;
   height: 100vh;
   background-color: #f2f2f2;
-  background-color: #252525;
+  background-color: #471414a9;
   padding: var(--padding);
 }
 
@@ -36,9 +37,9 @@ body {
   background-size: 100% 1.2em;
   height: fit-content;
   min-height: calc(100vh * 0.2 - var(--padding));
-  width: 70%;
   margin: 0 auto;
   padding: 1rem;
+  border: #25252536 1px solid;
 }
 
 #ListName {
@@ -54,6 +55,7 @@ body {
   padding: 8px;
   font-weight: 700;
   text-align: left;
+  text-align: center;
 }
 
 #ListName:focus {
@@ -64,7 +66,6 @@ body {
 
 .sub_task,
 .task_name {
-  width: 80%;
   height: 2.5rem;
   margin: 1rem auto auto 2rem;
   display: flex;
@@ -162,6 +163,7 @@ button {
 .popupADD:hover::before {
   opacity: 0.7;
   display: block;
+  font-size: 0.8rem;
 }
 
 .popupDEL::before {
@@ -178,6 +180,7 @@ button {
   opacity: 0;
   transition: 2000ms;
   display: none;
+  font-size: 0.8rem;
 }
 
 .popupDEL:hover::before {
@@ -188,35 +191,9 @@ button {
 .backspace::before {
   content: "delete subtask";
   left: -100px;
-  top: 3px;
+  top: -4px;
   display: none;
-}
-
-.redBTN,
-.greenBTN {
-  display: flex;
-  background-color: red;
-  font-size: 16px;
-  border-radius: 8px;
-  color: whitesmoke;
-  padding: 8px;
-  width: fit-content;
-  height: fit-content;
-  text-align: center;
-  margin: auto;
-  margin-top: 16px;
-  border: none;
-  text-transform: uppercase;
-  font-weight: bolder;
-  cursor: pointer;
-
-  padding: 16px;
-}
-
-.greenBTN {
-  background-color: #259613;
-
-  padding: 16px;
+  font-size: 0.8rem;
 }
 
 .redBTN:hover,

@@ -29,11 +29,11 @@ function render() {
   for (let i = 1; i < mInfo.length; i++) {
     main.innerHTML += `
 
-      <div class="task" id="t${i}"> 
+      <div class="task col-12" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           
           <button class="checkbox" id="task${i}check"></button>
-          <input class="job" id="task${i}text" type="text" placeholder="type task" value="${mInfo[i][0][0]}" />
+          <input class="job col-4" id="task${i}text" type="text" placeholder="type task" value="${mInfo[i][0][0]}" />
           
           <button class="addBTN popupADD" id="taskicheck">
             <span class="material-symbols-outlined icon " id="add${i}">add</span>
