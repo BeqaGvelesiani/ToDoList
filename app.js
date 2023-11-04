@@ -24,7 +24,7 @@ function render() {
   main.innerHTML = `
       
       <input class="bordered" type="text" placeholder="type list name" value="${mInfo[0]}" id="ListName"/>
-      <p class="text-center">${date()}</p>
+      <p class="text-center"><strong>Today: ${date()}</strong></p>
     `;
 
   for (let i = 1; i < mInfo.length; i++) {
