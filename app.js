@@ -30,7 +30,7 @@ function render() {
   for (let i = 1; i < mInfo.length; i++) {
     main.innerHTML += `
 
-      <div class="task col-12 container-ms" id="t${i}"> 
+      <div class="task col-11" id="t${i}"> 
         <div class="task_name bordered" id="task${i}">
           
           <button class="checkbox col-1" id="task${i}check"></button>
