@@ -68,13 +68,13 @@ body {
 .sub_task,
 .task_name {
   height: 2.5rem;
-  margin: 1rem auto auto 2rem;
+  margin: 1rem 0rem 0rem 0.5rem;
   display: flex;
   font-size: 2rem;
 }
 
 .sub_task {
-  margin: 0.5rem auto auto 3rem;
+  margin: 0.5rem auto auto 1.5rem;
 }
 
 .checkbox,
@@ -83,8 +83,8 @@ body {
   width: 25px;
   height: 25px;
   background-color: rgba(245, 245, 220, 0);
-  border: 1px solid rgba(71, 68, 68, 0.751);
-  border-radius: 20%;
+  border: 1px solid rgba(71, 68, 68, 0.418);
+  border-radius: 15%;
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -250,16 +250,12 @@ button {
   }
 
   .main {
-    width: 100%;
     height: fit-content;
-    min-height: 60vh;
-    width: 99%;
     margin: 0;
-    padding: 0;
+    padding: 0.5rem;
   }
 
   #ListName {
-    font-size: 1.2rem;
-    text-align: center;
+    font-size: 1.1rem;
   }
 }
