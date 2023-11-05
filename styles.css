@@ -41,6 +41,7 @@ body {
   margin: 0 auto;
   padding: 1rem;
   border: #25252536 1px solid;
+  box-sizing: border-box;
 }
 
 #ListName {
